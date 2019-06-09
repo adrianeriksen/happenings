@@ -11,7 +11,11 @@
 <div class="container max-w-4xl my-8 mx-auto">
     <div class="flex -mx-2">
         <div class="w-1/4 px-3">
-            <img src="/static/images/logo.png" alt="The Happenings Cat" />
+            <a href="/"><img src="/static/images/logo.png" alt="The Happenings Cat" /></a>
+
+            <ul>
+                <li class="my-4"><a href="/events/new" class="uppercase text-blue-500 hover:text-blue-800">Create Event</a></li>
+            </ul>
         </div>
         <div class="w-3/4 px-3">
             <#nested />
