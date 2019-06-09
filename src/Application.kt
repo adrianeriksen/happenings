@@ -4,6 +4,7 @@ import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.*
 import io.ktor.freemarker.*
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.*
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -14,6 +15,7 @@ import io.sixtysix.models.NewEvent
 import io.sixtysix.services.DatabaseFactory
 import io.sixtysix.services.EventService
 import org.joda.time.DateTime
+import java.io.File
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -28,6 +30,12 @@ fun Application.module() {
     val eventService = EventService()
 
     routing {
+        static("static") {
+            static("images") {
+                resources("static/images")
+            }
+        }
+
         get("/") {
             val events = eventService.getAllEvents()
             val model = mapOf("events" to events)
