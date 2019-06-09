@@ -72,10 +72,11 @@ fun Application.module() {
 
             val title = postParameters["title"]!!
             val startsAt = parseDateTime(postParameters["starts-at"])!!
+            val where = postParameters["where"]
 
             val event = NewEvent(
                 title = title,
-                where = null,
+                where = where,
                 description = null,
                 startsAt = startsAt,
                 endsAt = null)
