@@ -1,4 +1,4 @@
-# Happenings
+![Happenings Logo](resources/static/images/logo_small.png)
 
 Just another random hobby project developed solely for educational purposes. Do not use in production environments, it 
 will probably just crash.
