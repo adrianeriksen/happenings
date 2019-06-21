@@ -9,7 +9,7 @@ repositories {
 }
 
 application {
-    group = "no.sixtysix.happenings"
+    group = "io.sixtysix.happenings"
     version = "0.0.1-SNAPSHOT"
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
