@@ -2,7 +2,9 @@ package io.sixtysix
 
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.*
+import io.ktor.features.ContentNegotiation
 import io.ktor.freemarker.*
+import io.ktor.gson.gson
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.receiveParameters
@@ -11,11 +13,12 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.routing
+import io.sixtysix.happenings.controllers.eventsController
+import io.sixtysix.happenings.utils.DateTimeAdapter
 import io.sixtysix.models.NewEvent
 import io.sixtysix.services.DatabaseFactory
 import io.sixtysix.services.EventService
 import org.joda.time.DateTime
-import java.io.File
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -25,11 +28,19 @@ fun Application.module() {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
     }
 
+    install(ContentNegotiation) {
+        gson {
+            registerTypeAdapter(DateTime::class.java, DateTimeAdapter())
+        }
+    }
+
     DatabaseFactory.init()
 
     val eventService = EventService()
 
     routing {
+        eventsController(eventService)
+
         static("static") {
             static("images") {
                 resources("static/images")

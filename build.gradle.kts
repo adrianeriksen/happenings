@@ -27,6 +27,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-freemarker:$ktorVersion")
+    implementation("io.ktor:ktor-gson:$ktorVersion")
     implementation("org.jetbrains.exposed:exposed:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion")
