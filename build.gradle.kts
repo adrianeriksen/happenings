@@ -24,13 +24,16 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation("io.ktor:ktor-freemarker:$ktorVersion")
-    implementation("io.ktor:ktor-gson:$ktorVersion")
     implementation("org.jetbrains.exposed:exposed:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion")
 
-    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    "io.ktor:ktor".let {
+        implementation("$it-server-netty:$ktorVersion")
+        implementation("$it-server-core:$ktorVersion")
+        implementation("$it-freemarker:$ktorVersion")
+        implementation("$it-gson:$ktorVersion")
+
+        testImplementation("$it-server-tests:$ktorVersion")
+    }
 }
