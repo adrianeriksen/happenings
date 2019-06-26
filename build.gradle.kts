@@ -31,7 +31,6 @@ dependencies {
     "io.ktor:ktor".let {
         implementation("$it-server-netty:$ktorVersion")
         implementation("$it-server-core:$ktorVersion")
-        implementation("$it-freemarker:$ktorVersion")
         implementation("$it-gson:$ktorVersion")
 
         testImplementation("$it-server-tests:$ktorVersion")
