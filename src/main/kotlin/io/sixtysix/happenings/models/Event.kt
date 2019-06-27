@@ -1,4 +1,4 @@
-package io.sixtysix.models
+package io.sixtysix.happenings.models
 
 import org.jetbrains.exposed.sql.Table
 import org.joda.time.DateTime
@@ -10,8 +10,8 @@ object Events : Table() {
     val description = text("description").nullable()
     val startsAt = datetime("starts_at")
     val endsAt = datetime("ends_at").nullable()
-    val createdAt = datetime("created_on")
-    val updatedAt = datetime("updated_on")
+    val createdAt = datetime("created_at")
+    val updatedAt = datetime("updated_at")
 }
 
 data class Event(val id: Int,

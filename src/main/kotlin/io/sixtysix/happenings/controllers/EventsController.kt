@@ -8,8 +8,8 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
-import io.sixtysix.models.NewEvent
-import io.sixtysix.services.EventService
+import io.sixtysix.happenings.models.NewEvent
+import io.sixtysix.happenings.services.EventService
 
 fun Route.eventsController(eventService: EventService) {
 

@@ -1,9 +1,9 @@
-package io.sixtysix.services
+package io.sixtysix.happenings.services
 
-import io.sixtysix.models.Event
-import io.sixtysix.models.Events
-import io.sixtysix.models.NewEvent
-import io.sixtysix.services.DatabaseFactory.dbQuery
+import io.sixtysix.happenings.models.Event
+import io.sixtysix.happenings.models.Events
+import io.sixtysix.happenings.models.NewEvent
+import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
