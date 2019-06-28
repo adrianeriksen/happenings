@@ -27,6 +27,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion")
+    implementation("jbcrypt:jbcrypt:0.3")
 
     "io.ktor:ktor".let {
         implementation("$it-server-netty:$ktorVersion")
