@@ -16,6 +16,7 @@ application {
 
 dependencies {
     val ktorVersion = "1.2.2"
+    val argonVersion = "2.5"
     val exposedVersion = "0.15.1"
     val hikariVersion = "3.3.1"
     val mariadbClientVersion = "2.4.2"
@@ -27,7 +28,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion")
-    implementation("jbcrypt:jbcrypt:0.3")
+    implementation("de.mkammerer:argon2-jvm:$argonVersion")
 
     "io.ktor:ktor".let {
         implementation("$it-server-netty:$ktorVersion")

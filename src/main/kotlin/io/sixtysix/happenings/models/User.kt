@@ -1,6 +1,6 @@
 package io.sixtysix.happenings.models
 
-import jBCrypt.BCrypt
+import io.sixtysix.happenings.utils.PasswordUtil
 import org.jetbrains.exposed.sql.Table
 import org.joda.time.DateTime
 
@@ -21,5 +21,5 @@ data class User(val id: Int,
                 val updatedAt: DateTime) {
 
     fun validatePassword(password: String): Boolean =
-        BCrypt.checkpw(password, encryptedPassword)
+        PasswordUtil.verifyPassword(this, password)
 }

@@ -4,6 +4,7 @@ import io.ktor.application.*
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.routing.routing
+import io.ktor.util.KtorExperimentalAPI
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.utils.DateTimeAdapter
