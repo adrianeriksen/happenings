@@ -34,6 +34,7 @@ dependencies {
         implementation("$it-server-netty:$ktorVersion")
         implementation("$it-server-core:$ktorVersion")
         implementation("$it-gson:$ktorVersion")
+        implementation("$it-auth-jwt:$ktorVersion")
 
         testImplementation("$it-server-tests:$ktorVersion")
     }

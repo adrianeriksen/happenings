@@ -1,11 +1,11 @@
 package io.sixtysix.happenings.utils
 
 import de.mkammerer.argon2.Argon2Factory
-import io.sixtysix.happenings.models.User
+import io.sixtysix.happenings.models.UserCredentials
 
 object PasswordUtil {
 
-    fun verifyPassword(user: User, password: String): Boolean {
+    fun verifyPassword(user: UserCredentials, password: String): Boolean {
         val argon2 = Argon2Factory.create()
 
         argon2.run {
