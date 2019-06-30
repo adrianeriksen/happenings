@@ -1,8 +1,8 @@
 package io.sixtysix.happenings.services
 
+import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.Event
 import io.sixtysix.happenings.models.Events
-import io.sixtysix.happenings.models.NewEvent
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
@@ -20,7 +20,7 @@ class EventService {
         Events.select { Events.id eq id }.mapNotNull { toEvent(it) }.singleOrNull()
     }
 
-    suspend fun createEvent(event: NewEvent, userId: Int) {
+    suspend fun createEvent(event: NewEventForm, userId: Int) {
         val currentTime = DateTime.now()
 
         dbQuery {

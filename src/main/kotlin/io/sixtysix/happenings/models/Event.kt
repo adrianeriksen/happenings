@@ -11,9 +11,3 @@ data class Event(val id: Int,
                  val createdBy: Int,
                  val createdAt: DateTime,
                  val updatedAt: DateTime)
-
-data class NewEvent(val title: String,
-                    val description: String?,
-                    val where: String?,
-                    val startsAt: DateTime,
-                    val endsAt: DateTime?)

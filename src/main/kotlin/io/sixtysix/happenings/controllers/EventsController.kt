@@ -11,7 +11,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
-import io.sixtysix.happenings.models.NewEvent
+import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
 
 fun Route.eventsController(eventService: EventService) {
@@ -36,7 +36,7 @@ fun Route.eventsController(eventService: EventService) {
                 val principal = call.authentication.principal<JWTPrincipal>()
                 val userId = principal!!.payload.getClaim("id").asInt()
 
-                val event = call.receive<NewEvent>()
+                val event = call.receive<NewEventForm>()
                 eventService.createEvent(event, userId)
                 call.respond(HttpStatusCode.Created)
             }
