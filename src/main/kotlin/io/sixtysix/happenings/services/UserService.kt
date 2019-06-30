@@ -1,11 +1,15 @@
 package io.sixtysix.happenings.services
 
+import io.sixtysix.happenings.forms.NewUserForm
 import io.sixtysix.happenings.models.User
 import io.sixtysix.happenings.models.UserCredentials
 import io.sixtysix.happenings.models.Users
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
+import io.sixtysix.happenings.utils.PasswordUtil
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.joda.time.DateTime
 
 class UserService {
 
@@ -18,6 +22,20 @@ class UserService {
         dbQuery {
             Users.select { Users.email eq email }.mapNotNull { toUserCredentials(it) }.singleOrNull()
         }
+
+    suspend fun createUser(user: NewUserForm) {
+        val currentTime = DateTime.now()
+
+        dbQuery {
+            Users.insert {
+                it[email] = user.email
+                it[hashedPassword] = user.hashedPassword
+                it[name] = user.email
+                it[createdAt] = currentTime
+                it[updatedAt] = currentTime
+            }
+        }
+    }
 
     private fun toUser(row: ResultRow): User =
         User(

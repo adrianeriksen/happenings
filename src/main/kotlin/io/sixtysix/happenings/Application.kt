@@ -11,6 +11,7 @@ import io.ktor.response.respond
 import io.ktor.routing.routing
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
+import io.sixtysix.happenings.controllers.userController
 import io.sixtysix.happenings.exceptions.AuthenticationException
 import io.sixtysix.happenings.exceptions.ErrorResponse
 import io.sixtysix.happenings.services.AuthService
@@ -62,5 +63,6 @@ fun Application.module() {
     routing {
         authController(userService, authService)
         eventsController(eventService)
+        userController(userService)
     }
 }
