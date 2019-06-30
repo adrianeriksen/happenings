@@ -21,6 +21,7 @@ dependencies {
     val hikariVersion = "3.3.1"
     val mariadbClientVersion = "2.4.2"
     val logbackVersion = "1.2.3"
+    val junitVersion = "5.4.2"
 
     implementation(kotlin("stdlib-jdk8"))
 
@@ -37,5 +38,10 @@ dependencies {
         implementation("$it-auth-jwt:$ktorVersion")
 
         testImplementation("$it-server-tests:$ktorVersion")
+    }
+
+    "org.junit.jupiter:junit-jupiter".let {
+        testImplementation("$it-api:$junitVersion")
+        testImplementation("$it-engine:$junitVersion")
     }
 }
