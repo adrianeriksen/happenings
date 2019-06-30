@@ -32,6 +32,6 @@ class UserService {
         UserCredentials(
             id = row[Users.id],
             email = row[Users.email],
-            encryptedPassword = row[Users.encryptedPassword]
+            hashedPassword = row[Users.hashedPassword]
         )
 }

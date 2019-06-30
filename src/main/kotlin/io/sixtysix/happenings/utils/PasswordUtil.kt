@@ -9,7 +9,7 @@ object PasswordUtil {
         val argon2 = Argon2Factory.create()
 
         argon2.run {
-            val isValid = verify(user.encryptedPassword, password)
+            val isValid = verify(user.hashedPassword, password)
 
             wipeArray(password.toCharArray())
             return isValid

@@ -20,7 +20,7 @@ class EventService {
         Events.select { Events.id eq id }.mapNotNull { toEvent(it) }.singleOrNull()
     }
 
-    suspend fun createEvent(event: NewEvent) {
+    suspend fun createEvent(event: NewEvent, userId: Int) {
         val currentTime = DateTime.now()
 
         dbQuery {
@@ -30,6 +30,7 @@ class EventService {
                 it[description] = event.description
                 it[startsAt] = event.startsAt
                 it[endsAt] = event.endsAt
+                it[createdBy] = userId
                 it[createdAt] = currentTime
                 it[updatedAt] = currentTime
             }
@@ -44,6 +45,7 @@ class EventService {
                 description = row[Events.description],
                 startsAt = row[Events.startsAt],
                 endsAt = row[Events.endsAt],
+                createdBy = row[Events.createdBy],
                 createdAt = row[Events.createdAt],
                 updatedAt = row[Events.updatedAt]
             )

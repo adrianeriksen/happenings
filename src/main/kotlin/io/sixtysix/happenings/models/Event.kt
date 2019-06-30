@@ -1,18 +1,6 @@
 package io.sixtysix.happenings.models
 
-import org.jetbrains.exposed.sql.Table
 import org.joda.time.DateTime
-
-object Events : Table() {
-    val id = integer("id").primaryKey().autoIncrement()
-    val title = varchar("title", 255)
-    val where = varchar("where", 255).nullable()
-    val description = text("description").nullable()
-    val startsAt = datetime("starts_at")
-    val endsAt = datetime("ends_at").nullable()
-    val createdAt = datetime("created_at")
-    val updatedAt = datetime("updated_at")
-}
 
 data class Event(val id: Int,
                  val title: String,
@@ -20,6 +8,7 @@ data class Event(val id: Int,
                  val description: String?,
                  val startsAt: DateTime,
                  val endsAt: DateTime?,
+                 val createdBy: Int,
                  val createdAt: DateTime,
                  val updatedAt: DateTime)
 
