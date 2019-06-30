@@ -6,9 +6,9 @@ import io.sixtysix.happenings.models.UserCredentials
 
 object PasswordUtil {
 
-    private const val TIME_IN_MS = 1500L
+    private const val TIME_IN_MS = 500L
     private const val MEMORY_COST = 65536
-    private const val PARALLELISM = 2
+    private const val PARALLELISM = 1
 
     private var argon2hasher = Argon2Factory.create()
 
