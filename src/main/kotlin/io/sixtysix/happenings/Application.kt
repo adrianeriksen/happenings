@@ -34,7 +34,7 @@ fun Application.module() {
 
     install(StatusPages) {
         exception<AuthenticationException> { cause ->
-            call.respond(ErrorResponse(cause.status, cause.message))
+            call.respond(cause.status, ErrorResponse(cause.status, cause.message))
         }
     }
 
