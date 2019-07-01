@@ -42,6 +42,12 @@ dependencies {
 
     "org.junit.jupiter:junit-jupiter".let {
         testImplementation("$it-api:$junitVersion")
-        testImplementation("$it-engine:$junitVersion")
+        testRuntime("$it-engine:$junitVersion")
+    }
+}
+
+tasks {
+    "test"(Test::class) {
+        useJUnitPlatform()
     }
 }
