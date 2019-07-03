@@ -38,6 +38,7 @@ dependencies {
         implementation("$it-auth-jwt:$ktorVersion")
 
         testImplementation("$it-server-tests:$ktorVersion")
+        testImplementation("$it-server-test-host:$ktorVersion")
     }
 
     "org.junit.jupiter:junit-jupiter".let {

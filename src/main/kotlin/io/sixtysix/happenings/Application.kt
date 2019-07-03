@@ -9,6 +9,7 @@ import io.ktor.features.StatusPages
 import io.ktor.gson.gson
 import io.ktor.response.respond
 import io.ktor.routing.routing
+import io.ktor.util.KtorExperimentalAPI
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.controllers.userController
@@ -18,12 +19,12 @@ import io.sixtysix.happenings.services.AuthService
 import io.sixtysix.happenings.utils.DateTimeAdapter
 import io.sixtysix.happenings.services.DatabaseFactory
 import io.sixtysix.happenings.services.EventService
-import io.sixtysix.happenings.services.UserService
+import io.sixtysix.happenings.services.UserServiceImpl
 import org.joda.time.DateTime
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused")
+@KtorExperimentalAPI
 fun Application.module() {
 
     install(ContentNegotiation) {
@@ -45,7 +46,7 @@ fun Application.module() {
 
     val authService = AuthService(jwtIssuer, jwtSecret)
     val eventService = EventService()
-    val userService = UserService()
+    val userService = UserServiceImpl()
 
     install(Authentication) {
         jwt {
