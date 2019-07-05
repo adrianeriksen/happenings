@@ -15,17 +15,14 @@ import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.controllers.userController
 import io.sixtysix.happenings.exceptions.AuthenticationException
 import io.sixtysix.happenings.exceptions.ErrorResponse
-import io.sixtysix.happenings.services.AuthService
+import io.sixtysix.happenings.services.*
 import io.sixtysix.happenings.utils.DateTimeAdapter
-import io.sixtysix.happenings.services.DatabaseFactory
-import io.sixtysix.happenings.services.EventService
-import io.sixtysix.happenings.services.UserServiceImpl
 import org.joda.time.DateTime
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @KtorExperimentalAPI
-fun Application.module() {
+fun Application.module(authService: AuthService, eventService: EventService, userService: UserService) {
 
     install(ContentNegotiation) {
         gson {
@@ -38,15 +35,6 @@ fun Application.module() {
             call.respond(cause.status, ErrorResponse(cause.status, cause.message))
         }
     }
-
-    val jwtIssuer = environment.config.property("jwt.domain").getString()
-    val jwtSecret = environment.config.property("jwt.secret").getString()
-
-    DatabaseFactory.init()
-
-    val authService = AuthService(jwtIssuer, jwtSecret)
-    val eventService = EventService()
-    val userService = UserServiceImpl()
 
     install(Authentication) {
         jwt {
@@ -66,4 +54,30 @@ fun Application.module() {
         eventsController(eventService)
         userController(userService)
     }
+}
+
+@KtorExperimentalAPI
+fun Application.regularModule() {
+    val jwtIssuer = environment.config.property("jwt.domain").getString()
+    val jwtSecret = environment.config.property("jwt.secret").getString()
+
+    DatabaseFactory.init()
+
+    val authService = AuthService(jwtIssuer, jwtSecret)
+    val eventService = EventServiceImpl()
+    val userService = UserServiceImpl()
+
+    module(authService, eventService, userService)
+}
+
+@KtorExperimentalAPI
+fun Application.testableModule() {
+    val jwtIssuer = environment.config.property("jwt.domain").getString()
+    val jwtSecret = environment.config.property("jwt.secret").getString()
+
+    val authService = AuthService(jwtIssuer, jwtSecret)
+    val eventService = EventServiceImpl()
+    val userService = UserServiceMock()
+
+    module(authService, eventService, userService)
 }
