@@ -12,7 +12,7 @@ data class NewUserForm(val email: String, val password: String, val name: String
             return false
         }
 
-        if (password.length < 12) {
+        if (password.codePoints().count() < 12) {
             return false
         }
 

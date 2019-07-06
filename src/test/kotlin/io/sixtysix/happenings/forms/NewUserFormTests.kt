@@ -29,6 +29,39 @@ class NewUserFormTests {
     }
 
     @Test
+    fun `should be valid with passwords longer than 64 characters`() {
+        val userForm = NewUserForm(
+            email = "adrian@example.no",
+            password = "chocolate crackers",
+            name = "Adrian E."
+        )
+
+        assertTrue(userForm.isValid())
+    }
+
+    @Test
+    fun `should be valid with emoji passwords`() {
+        val userForm = NewUserForm(
+            email = "adrian@example.no",
+            password = "🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮",
+            name = "Adrian E."
+        )
+
+        assertTrue(userForm.isValid())
+    }
+
+    @Test
+    fun `should be invalid with short emoji passwords`() {
+        val userForm = NewUserForm(
+            email = "adrian@example.no",
+            password = "🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁",
+            name = "Adrian E."
+        )
+
+        assertFalse(userForm.isValid())
+    }
+
+    @Test
     fun `should be invalid with short password`() {
         val userForm = NewUserForm(
             email = "adrian@example.no",
