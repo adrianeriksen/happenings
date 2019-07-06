@@ -20,18 +20,32 @@ class UserControllerTests {
     private val gson = Gson();
 
     @Test
-    fun `Return 201 created`() = testApplication {
+    fun `Return 201 created with correct input`() = testApplication {
         val payload = NewUserForm(
             email = "jonas@example.no",
             password = "chess underpants",
             name = "Jonas S.")
-
 
         handleRequest(HttpMethod.Post, "/api/user") {
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             setBody(gson.toJson(payload))
         }.apply {
             assertEquals(HttpStatusCode.Created, response.status())
+        }
+    }
+
+    @Test
+    fun `Return 400 bad request with short password`() = testApplication {
+        val payload = NewUserForm(
+            email = "adrian@example.no",
+            password = "moped ninja",
+            name = "Adrian E.")
+
+        handleRequest(HttpMethod.Post, "/api/user") {
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            setBody(gson.toJson(payload))
+        }.apply {
+            assertEquals(HttpStatusCode.BadRequest, response.status())
         }
     }
 

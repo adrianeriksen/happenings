@@ -15,9 +15,14 @@ fun Route.userController(userService: UserService) {
     route("/api/user") {
 
         post("/") {
-            val user = call.receive<NewUserForm>()
-            userService.createUser(user)
-            call.respond(HttpStatusCode.Created)
+            val userForm = call.receive<NewUserForm>()
+
+            if (userForm.isValid()) {
+                userService.createUser(userForm)
+                call.respond(HttpStatusCode.Created)
+            } else {
+                call.respond(HttpStatusCode.BadRequest)
+            }
         }
     }
 }
