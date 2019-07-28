@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.3.40"
+    kotlin("jvm") version "1.3.41"
     application
 }
 
@@ -17,11 +17,11 @@ application {
 dependencies {
     val ktorVersion = "1.2.2"
     val argonVersion = "2.5"
-    val exposedVersion = "0.15.1"
+    val exposedVersion = "0.16.3"
     val hikariVersion = "3.3.1"
     val mariadbClientVersion = "2.4.2"
     val logbackVersion = "1.2.3"
-    val junitVersion = "5.4.2"
+    val junitVersion = "5.5.1"
 
     implementation(kotlin("stdlib-jdk8"))
 
