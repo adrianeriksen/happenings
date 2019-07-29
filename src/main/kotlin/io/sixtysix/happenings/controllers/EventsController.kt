@@ -7,10 +7,7 @@ import io.ktor.auth.jwt.JWTPrincipal
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
-import io.ktor.routing.Route
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.route
+import io.ktor.routing.*
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
 
@@ -39,6 +36,27 @@ fun Route.eventsController(eventService: EventService) {
                 val event = call.receive<NewEventForm>()
                 eventService.createEvent(event, userId)
                 call.respond(HttpStatusCode.Created)
+            }
+
+            delete("/{id}") {
+                val principal = call.authentication.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("id").asInt()
+
+                val id = call.parameters["id"]?.toInt()!!
+                val event = eventService.getEvent(id)
+
+                if (event == null) {
+                    call.respond(HttpStatusCode.NotFound)
+                    return@delete
+                }
+
+                if (event.createdBy != userId) {
+                    call.respond(HttpStatusCode.Forbidden)
+                    return@delete
+                }
+
+                eventService.deleteEvent(id)
+                call.respond(HttpStatusCode.NoContent)
             }
         }
     }

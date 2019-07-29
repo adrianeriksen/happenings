@@ -9,5 +9,7 @@ interface EventService {
 
     suspend fun getEvent(id: Int): Event?
 
-    suspend fun createEvent(event: NewEventForm, userId: Int): Unit
+    suspend fun createEvent(event: NewEventForm, userId: Int)
+
+    suspend fun deleteEvent(id: Int)
 }

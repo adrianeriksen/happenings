@@ -4,10 +4,7 @@ import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.Event
 import io.sixtysix.happenings.models.Events
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.joda.time.DateTime
 
 class EventServiceImpl : EventService {
@@ -34,6 +31,12 @@ class EventServiceImpl : EventService {
                 it[createdAt] = currentTime
                 it[updatedAt] = currentTime
             }
+        }
+    }
+
+    override suspend fun deleteEvent(id: Int) {
+        dbQuery {
+            Events.deleteWhere { Events.id eq id }
         }
     }
 

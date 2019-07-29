@@ -16,4 +16,8 @@ class EventServiceMock : EventService {
     override suspend fun createEvent(event: NewEventForm, userId: Int) {
         // Do nothing :)
     }
+
+    override suspend fun deleteEvent(id: Int) {
+        // Do nothing :)
+    }
 }
