@@ -76,7 +76,7 @@ fun Application.testableModule() {
     val jwtSecret = environment.config.property("jwt.secret").getString()
 
     val authService = AuthService(jwtIssuer, jwtSecret)
-    val eventService = EventServiceImpl()
+    val eventService = EventServiceMock()
     val userService = UserServiceMock()
 
     module(authService, eventService, userService)

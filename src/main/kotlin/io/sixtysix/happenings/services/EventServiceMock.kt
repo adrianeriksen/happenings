@@ -2,6 +2,7 @@ package io.sixtysix.happenings.services
 
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.Event
+import org.joda.time.DateTime
 
 class EventServiceMock : EventService {
 
@@ -10,7 +11,20 @@ class EventServiceMock : EventService {
     }
 
     override suspend fun getEvent(id: Int): Event? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (id == 1) {
+            return Event(
+                id = 1,
+                title = "Example Event",
+                where = null,
+                description = null,
+                startsAt = DateTime.now(),
+                endsAt = null,
+                createdBy = 1,
+                createdAt = DateTime.now(),
+                updatedAt = DateTime.now())
+        }
+
+        return null
     }
 
     override suspend fun createEvent(event: NewEventForm, userId: Int) {

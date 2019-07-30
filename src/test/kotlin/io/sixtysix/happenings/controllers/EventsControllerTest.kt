@@ -11,11 +11,23 @@ import kotlin.test.assertEquals
 class EventsControllerTest : ControllerTest {
 
     @Test
-    fun `Should not proceed when unauthenticated`() = testApplication {
-        handleRequest(HttpMethod.Delete, "/api/events/2") {
+    fun `Return 401 Unauthorized when unauthenticated`() = testApplication {
+        handleRequest(HttpMethod.Delete, "/api/events/1") {
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
         }.apply {
             assertEquals(HttpStatusCode.Unauthorized, response.status())
+        }
+    }
+
+    @Test
+    fun `Return 204 No Content when delete was successful`() = testApplication {
+        val authToken = generateAuthorizationToken()
+
+        handleRequest(HttpMethod.Delete, "/api/events/1") {
+            addHeader(HttpHeaders.Authorization, "Bearer $authToken")
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+        }.apply {
+            assertEquals(HttpStatusCode.NoContent, response.status())
         }
     }
 }
