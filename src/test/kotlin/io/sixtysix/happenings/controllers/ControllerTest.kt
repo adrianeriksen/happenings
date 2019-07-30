@@ -5,7 +5,7 @@ import io.ktor.server.testing.TestApplicationEngine
 import io.ktor.server.testing.withTestApplication
 import io.sixtysix.happenings.testableModule
 
-abstract class ControllerTest {
+interface ControllerTest {
 
     fun testApplication(callback: TestApplicationEngine.() -> Unit): Unit =
         withTestApplication({

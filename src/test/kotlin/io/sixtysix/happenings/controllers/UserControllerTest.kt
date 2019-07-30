@@ -11,7 +11,7 @@ import io.sixtysix.happenings.forms.NewUserForm
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class UserControllerTest : ControllerTest() {
+class UserControllerTest : ControllerTest {
 
     private val gson = Gson();
 

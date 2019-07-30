@@ -8,7 +8,7 @@ import io.ktor.server.testing.handleRequest
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class EventsControllerTest : ControllerTest() {
+class EventsControllerTest : ControllerTest {
 
     @Test
     fun `Should not proceed when unauthenticated`() = testApplication {
