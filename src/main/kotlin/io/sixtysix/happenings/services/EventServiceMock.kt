@@ -14,12 +14,25 @@ class EventServiceMock : EventService {
         if (id == 1) {
             return Event(
                 id = 1,
-                title = "Example Event",
+                title = "Example event",
                 where = null,
                 description = null,
                 startsAt = DateTime.now(),
                 endsAt = null,
                 createdBy = 1,
+                createdAt = DateTime.now(),
+                updatedAt = DateTime.now())
+        }
+
+        if (id == 2) {
+            return Event(
+                id = 2,
+                title = "Example event by another user",
+                where = null,
+                description = null,
+                startsAt = DateTime.now(),
+                endsAt = null,
+                createdBy = 2,
                 createdAt = DateTime.now(),
                 updatedAt = DateTime.now())
         }
