@@ -15,7 +15,7 @@ application {
 }
 
 dependencies {
-    val ktorVersion = "1.2.2"
+    val ktorVersion = "1.2.3"
     val argonVersion = "2.5"
     val exposedVersion = "0.16.3"
     val hikariVersion = "3.3.1"
