@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import { Container, Typography } from "@material-ui/core";
 import Event from "./Event";
 
 function App() {
@@ -11,12 +13,14 @@ function App() {
   });
 
   return (
-    <div>
-      <h1>Happenings</h1>
+    <Container maxWidth="sm">
+      <Typography variant="h2" component="h1">
+        Happenings
+      </Typography>
       {events.map(event => (
         <Event event={event} />
       ))}
-    </div>
+    </Container>
   );
 }
 
