@@ -1,8 +1,8 @@
-import React from "react";
-import moment from "moment";
+import React from 'react';
+import moment from 'moment';
 
-import { Card, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Card, CardContent, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   card: {
@@ -15,7 +15,7 @@ function Event({ event }) {
   const classes = useStyles();
 
   const { title, startsAt } = event;
-  const parsedStartsAt = moment(startsAt).format("dddd, D. MMMM YYYY, HH:mm");
+  const parsedStartsAt = moment(startsAt).format('dddd, D. MMMM YYYY, HH:mm');
 
   return (
     <Card className={classes.card}>

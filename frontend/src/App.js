@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Container, Typography } from "@material-ui/core";
-import Event from "./Event";
+import { Container, Typography } from '@material-ui/core';
+import Event from './Event';
 
 function App() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("/api/events")
+    fetch('/api/events')
       .then(res => res.json())
       .then(res => setEvents(res));
   });
