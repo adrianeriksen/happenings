@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Event({ event }) {
+function EventCard({ event }) {
   const classes = useStyles();
 
   const { title, startsAt } = event;
@@ -29,4 +29,4 @@ function Event({ event }) {
   );
 }
 
-export default Event;
+export default EventCard;

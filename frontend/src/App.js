@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import { makeStyles } from '@material-ui/styles';
 import { Container, Typography } from '@material-ui/core';
-import Event from './Event';
+
+import Events from './Events';
+import Login from './Login';
+
+const useStyles = makeStyles({
+  container: {
+    marginTop: 64
+  }
+});
 
 function App() {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/events')
-      .then(res => res.json())
-      .then(res => setEvents(res));
-  });
+  const classes = useStyles();
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h2" component="h1">
-        Happenings
-      </Typography>
-      {events.map(event => (
-        <Event event={event} />
-      ))}
-    </Container>
+    <Router>
+      <Container maxWidth="sm" className={classes.container}>
+        <Typography variant="h2" component="h1">
+          Happenings
+        </Typography>
+        <Switch>
+          <Route path="/" exact component={Events} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Container>
+    </Router>
   );
 }
 
