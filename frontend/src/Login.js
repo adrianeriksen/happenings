@@ -32,10 +32,21 @@ function Login() {
   };
 
   const onSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log(values);
-      setSubmitting(false);
-    }, 1000);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    const requestOptions = {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(values)
+    };
+
+    fetch('/api/auth/login', requestOptions)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.token);
+        setSubmitting(false);
+      });
   };
 
   return (
