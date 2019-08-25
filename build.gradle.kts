@@ -17,9 +17,9 @@ application {
 dependencies {
     val ktorVersion = "1.2.3"
     val argonVersion = "2.5"
-    val exposedVersion = "0.16.4"
+    val exposedVersion = "0.17.1"
     val hikariVersion = "3.3.1"
-    val mariadbClientVersion = "2.4.2"
+    val mariadbClientVersion = "2.4.3"
     val logbackVersion = "1.2.3"
     val junitVersion = "5.5.1"
 
