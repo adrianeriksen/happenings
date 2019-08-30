@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
 
 import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import UserContext from './UserContext';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
   button: {
@@ -69,6 +71,7 @@ function Login() {
         handleSubmit
       }) => (
         <form onSubmit={handleSubmit}>
+          <Typography variant="h3">Login</Typography>
           <TextField
             id="login-form-email"
             name="email"
