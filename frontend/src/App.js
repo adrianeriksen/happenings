@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/styles';
-import { Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 import Events from './Events';
 import Login from './Login';
 import UserContext from './UserContext';
+import Header from './Header';
 
 const useStyles = makeStyles({
   container: {
@@ -22,15 +23,15 @@ function App() {
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       <Router>
-        <Container maxWidth="sm" className={classes.container}>
-          <Typography variant="h2" component="h1">
-            Happenings
-          </Typography>
-          <Switch>
-            <Route path="/" exact component={Events} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </Container>
+        <>
+          <Header />
+          <Container maxWidth="sm" className={classes.container}>
+            <Switch>
+              <Route path="/" exact component={Events} />
+              <Route path="/login" component={Login} />
+            </Switch>
+          </Container>
+        </>
       </Router>
     </UserContext.Provider>
   );
