@@ -17,6 +17,8 @@ const useStyles = makeStyles({
 function Login() {
   const classes = useStyles();
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const initialValues = {
     email: '',
     password: ''
@@ -44,7 +46,10 @@ function Login() {
     fetch('/api/auth/login', requestOptions)
       .then(res => res.json())
       .then(res => {
-        console.log(res.token);
+        setCurrentUser({
+          email: values.email,
+          token: res.token
+        });
         setSubmitting(false);
       });
   };
