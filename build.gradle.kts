@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.3.50"
-    id("de.fayard.buildSrcVersions") version "0.4.2"
+    buildSrcVersions
     application
 }
 
