@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.3.50"
+    id("de.fayard.buildSrcVersions") version "0.4.2"
     application
 }
 
@@ -15,36 +16,24 @@ application {
 }
 
 dependencies {
-    val ktorVersion = "1.2.3"
-    val argonVersion = "2.5"
-    val exposedVersion = "0.17.1"
-    val hikariVersion = "3.3.1"
-    val mariadbClientVersion = "2.4.3"
-    val logbackVersion = "1.2.3"
-    val junitVersion = "5.5.1"
-
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("org.jetbrains.exposed:exposed:$exposedVersion")
-    implementation("com.zaxxer:HikariCP:$hikariVersion")
-    implementation("org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion")
-    implementation("de.mkammerer:argon2-jvm:$argonVersion")
+    implementation(Libs.logback_classic)
+    implementation(Libs.exposed)
+    implementation(Libs.hikaricp)
+    implementation(Libs.mariadb_java_client)
+    implementation(Libs.argon2_jvm)
 
-    "io.ktor:ktor".let {
-        implementation("$it-server-netty:$ktorVersion")
-        implementation("$it-server-core:$ktorVersion")
-        implementation("$it-gson:$ktorVersion")
-        implementation("$it-auth-jwt:$ktorVersion")
+    implementation(Libs.ktor_server_core)
+    implementation(Libs.ktor_server_netty)
+    implementation(Libs.ktor_gson)
+    implementation(Libs.ktor_auth_jwt)
 
-        testImplementation("$it-server-tests:$ktorVersion")
-        testImplementation("$it-server-test-host:$ktorVersion")
-    }
+    testImplementation(Libs.ktor_server_tests)
+    testImplementation(Libs.ktor_server_test_host)
 
-    "org.junit.jupiter:junit-jupiter".let {
-        testImplementation("$it-api:$junitVersion")
-        testRuntime("$it-engine:$junitVersion")
-    }
+    testRuntime(Libs.junit_jupiter_engine)
+    testImplementation(Libs.junit_jupiter_api)
 }
 
 tasks {
