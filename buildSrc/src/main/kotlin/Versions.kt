@@ -22,13 +22,11 @@ object Versions {
 
   const val io_ktor: String = "1.2.3"
 
-  const val exposed: String = "0.17.1" // available: "0.17.3"
+  const val exposed: String = "0.17.3"
 
   const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.50"
 
-  const val kotlin_scripting_compiler_embeddable: String = "1.3.50"
-
-  const val kotlin_stdlib_jdk8: String = "1.3.41" // available: "1.3.50"
+  const val org_jetbrains_kotlin: String = "1.3.50"
 
   const val org_junit_jupiter: String = "5.5.1"
 

@@ -16,7 +16,7 @@ application {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(Libs.kotlin_stdlib_jdk8)
 
     implementation(Libs.logback_classic)
     implementation(Libs.exposed)
