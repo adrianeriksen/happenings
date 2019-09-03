@@ -20,7 +20,7 @@ object Versions {
 
   const val argon2_jvm: String = "2.5"
 
-  const val io_ktor: String = "1.2.3"
+  const val io_ktor: String = "1.2.4"
 
   const val exposed: String = "0.17.3"
 
@@ -39,7 +39,7 @@ object Versions {
    */
   const val gradleLatestVersion: String = "5.6.1"
 
-  const val gradleCurrentVersion: String = "4.10.3"
+  const val gradleCurrentVersion: String = "5.6.1"
 }
 
 /**
