@@ -9,7 +9,7 @@ function Events() {
     fetch('/api/events')
       .then(res => res.json())
       .then(res => setEvents(res));
-  });
+  }, []);
 
   return events.map(event => <EventCard key={event.id} event={event} />);
 }
