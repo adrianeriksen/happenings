@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 
 import Events from './Events';
 import Login from './Login';
-import UserContext from './UserContext';
+import UserContext from '../contexts/UserContext';
 import Header from './Header';
 
 const useStyles = makeStyles({

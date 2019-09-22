@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import LoginButton from './LoginButton';
-import UserContext from './UserContext';
+import UserContext from '../contexts/UserContext';
 import UserInformation from './UserInformation';
 
 const useStyles = makeStyles(() => ({
