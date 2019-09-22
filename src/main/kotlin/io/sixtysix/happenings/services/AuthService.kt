@@ -25,6 +25,9 @@ class AuthService(private val issuer: String, secret: String) {
         .withExpiresAt(getExpiration())
         .sign(algorithm)
 
+    fun getEmail(token: String): String =
+        verifier.verify(token).getClaim("email").asString()
+
     private fun getExpiration(): Date {
         val expiresAt = LocalDateTime.now().plusHours(1)
         return Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant())

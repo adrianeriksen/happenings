@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/styles';
@@ -19,6 +19,18 @@ function App() {
   const classes = useStyles();
 
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/auth/token').then(async res => {
+      if (res.status === 200) {
+        const data = await res.json();
+        setCurrentUser({
+          email: data.email,
+          token: data.token
+        });
+      }
+    });
+  }, []);
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>

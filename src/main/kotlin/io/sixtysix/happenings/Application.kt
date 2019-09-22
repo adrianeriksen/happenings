@@ -9,7 +9,11 @@ import io.ktor.features.StatusPages
 import io.ktor.gson.gson
 import io.ktor.response.respond
 import io.ktor.routing.routing
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
+import io.ktor.sessions.directorySessionStorage
 import io.ktor.util.KtorExperimentalAPI
+import io.ktor.util.hex
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.controllers.userController
@@ -18,11 +22,15 @@ import io.sixtysix.happenings.exceptions.ErrorResponse
 import io.sixtysix.happenings.services.*
 import io.sixtysix.happenings.utils.DateTimeAdapter
 import org.joda.time.DateTime
+import java.io.File
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @KtorExperimentalAPI
 fun Application.module(authService: AuthService, eventService: EventService, userService: UserService) {
+
+    // TODO: Inject into application
+    val hashKey = hex("73b24864c3baab136598b6f66c68b26f")
 
     install(ContentNegotiation) {
         gson {
@@ -46,6 +54,15 @@ fun Application.module(authService: AuthService, eventService: EventService, use
 
                 JWTPrincipal(credential.payload)
             }
+        }
+    }
+
+    install(Sessions) {
+        cookie<UserSession>(
+            "SESSION_ID",
+            directorySessionStorage(File(".sessions"), cached = true)
+        ) {
+            cookie.path = "/"
         }
     }
 
