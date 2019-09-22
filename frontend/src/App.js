@@ -24,10 +24,7 @@ function App() {
     fetch('/api/auth/token').then(async res => {
       if (res.status === 200) {
         const data = await res.json();
-        setCurrentUser({
-          email: data.email,
-          token: data.token
-        });
+        setCurrentUser(data);
       }
     });
   }, []);

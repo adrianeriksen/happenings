@@ -7,7 +7,7 @@ function UserInformation({ user }) {
     <>
       <Button color="inherit">
         <AccountCircle />
-        &nbsp; {user.email}
+        &nbsp; {user.name}
       </Button>
     </>
   );

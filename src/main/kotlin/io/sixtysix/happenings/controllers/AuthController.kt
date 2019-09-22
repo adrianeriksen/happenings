@@ -14,8 +14,6 @@ import io.ktor.sessions.set
 import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.exceptions.InvalidCredentialsError
 import io.sixtysix.happenings.forms.LoginForm
-import io.sixtysix.happenings.models.Token
-import io.sixtysix.happenings.models.UserToken
 import io.sixtysix.happenings.services.AuthService
 import io.sixtysix.happenings.services.UserService
 
@@ -28,7 +26,12 @@ fun Route.authController(userService: UserService, authService: AuthService) {
 
             if (userSession != null) {
                 val email = authService.getEmail(userSession.token)
-                call.respond(UserToken(email, userSession.token))
+                val user = userService.getUserByEmail(email)
+
+                if (user != null) {
+                    call.respond(user.toAuthenticatedUser(token = userSession.token))
+                    return@get
+                }
             } else {
                 call.respond(HttpStatusCode.NoContent)
             }
@@ -42,7 +45,7 @@ fun Route.authController(userService: UserService, authService: AuthService) {
             if (user != null && user.validatePassword(loginForm.password)) {
                 val token = authService.generateToken(user)
                 call.sessions.set(UserSession(token))
-                call.respond(Token(token))
+                call.respond(user.toAuthenticatedUser(token))
             } else {
                 throw InvalidCredentialsError
             }

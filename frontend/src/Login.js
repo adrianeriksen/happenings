@@ -48,10 +48,7 @@ function Login() {
     fetch('/api/auth/login', requestOptions)
       .then(res => res.json())
       .then(res => {
-        setCurrentUser({
-          email: values.email,
-          token: res.token
-        });
+        setCurrentUser(res);
         setSubmitting(false);
       });
   };

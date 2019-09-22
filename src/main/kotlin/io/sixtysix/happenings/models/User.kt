@@ -6,4 +6,8 @@ data class User(val id: Int,
                 val email: String,
                 val name: String,
                 val createdAt: DateTime,
-                val updatedAt: DateTime)
+                val updatedAt: DateTime) {
+
+    fun toAuthenticatedUser(token: String) =
+        AuthenticatedUser(id, email, name, token)
+}
