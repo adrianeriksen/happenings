@@ -16,10 +16,14 @@ const useStyles = makeStyles({
   }
 });
 
-function Login() {
+function Login({ history }) {
   const classes = useStyles();
 
-  const { setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  if (currentUser) {
+    history.push('/');
+  }
 
   const initialValues = {
     email: '',
