@@ -30,7 +30,7 @@ class UserServiceImpl : UserService {
             Users.insert {
                 it[email] = user.email
                 it[hashedPassword] = user.hashedPassword
-                it[name] = user.email
+                it[name] = user.name
                 it[createdAt] = currentTime
                 it[updatedAt] = currentTime
             }
@@ -50,6 +50,7 @@ class UserServiceImpl : UserService {
         UserCredentials(
             id = row[Users.id],
             email = row[Users.email],
+            name = row[Users.name],
             hashedPassword = row[Users.hashedPassword]
         )
 }
