@@ -14,9 +14,9 @@ import org.gradle.plugin.use.PluginDependencySpec
 object Versions {
   const val logback_classic: String = "1.2.3"
 
-  const val hikaricp: String = "3.3.1"
+  const val hikaricp: String = "3.3.1" // available: "3.4.1"
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.5.0"
+  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.5.0" // available: "0.6.1"
 
   const val argon2_jvm: String = "2.5"
 
@@ -30,7 +30,7 @@ object Versions {
 
   const val org_junit_jupiter: String = "5.5.2"
 
-  const val mariadb_java_client: String = "2.4.3"
+  const val mariadb_java_client: String = "2.4.3" // available: "2.4.4"
 
   /**
    *

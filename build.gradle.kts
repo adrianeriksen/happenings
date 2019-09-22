@@ -26,6 +26,7 @@ dependencies {
 
     implementation(Libs.ktor_server_core)
     implementation(Libs.ktor_server_netty)
+    implementation(Libs.ktor_server_sessions)
     implementation(Libs.ktor_gson)
     implementation(Libs.ktor_auth_jwt)
 
