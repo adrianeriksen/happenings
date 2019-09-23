@@ -66,30 +66,17 @@ object Libs {
     /**
      * https://github.com/ktorio/ktor
      */
+    const val ktor_auth: String = "io.ktor:ktor-auth:" + Versions.io_ktor
+
     const val ktor_gson: String = "io.ktor:ktor-gson:" + Versions.io_ktor
 
-    /**
-     * https://github.com/ktorio/ktor
-     */
     const val ktor_server_core: String = "io.ktor:ktor-server-core:" + Versions.io_ktor
 
-    /**
-     * https://github.com/ktorio/ktor
-     */
     const val ktor_server_netty: String = "io.ktor:ktor-server-netty:" + Versions.io_ktor
 
-    /**
-     * https://github.com/ktorio/ktor
-     */
     const val ktor_server_sessions: String = "io.ktor:ktor-server-sessions:" + Versions.io_ktor
 
-    /**
-     * https://github.com/ktorio/ktor
-     */
     const val ktor_server_test_host: String = "io.ktor:ktor-server-test-host:" + Versions.io_ktor
 
-    /**
-     * https://github.com/ktorio/ktor
-     */
     const val ktor_server_tests: String = "io.ktor:ktor-server-tests:" + Versions.io_ktor
 }

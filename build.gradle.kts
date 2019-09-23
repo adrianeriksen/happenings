@@ -24,6 +24,7 @@ dependencies {
     implementation(Libs.mariadb_java_client)
     implementation(Libs.argon2_jvm)
 
+    implementation(Libs.ktor_auth)
     implementation(Libs.ktor_server_core)
     implementation(Libs.ktor_server_netty)
     implementation(Libs.ktor_server_sessions)

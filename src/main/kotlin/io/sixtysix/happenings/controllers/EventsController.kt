@@ -3,11 +3,13 @@ package io.sixtysix.happenings.controllers
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.authentication
-import io.ktor.auth.jwt.JWTPrincipal
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
+import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
 
@@ -30,8 +32,8 @@ fun Route.eventsController(eventService: EventService) {
 
         authenticate {
             post("/") {
-                val principal = call.authentication.principal<JWTPrincipal>()
-                val userId = principal!!.payload.getClaim("id").asInt()
+                val principal = call.sessions.get<UserSession>()
+                val userId = principal!!.id
 
                 val event = call.receive<NewEventForm>()
                 eventService.createEvent(event, userId)
@@ -39,8 +41,8 @@ fun Route.eventsController(eventService: EventService) {
             }
 
             delete("/{id}") {
-                val principal = call.authentication.principal<JWTPrincipal>()
-                val userId = principal!!.payload.getClaim("id").asInt()
+                val principal = call.sessions.get<UserSession>()
+                val userId = principal!!.id
 
                 val id = call.parameters["id"]?.toInt()!!
                 val event = eventService.getEvent(id)
