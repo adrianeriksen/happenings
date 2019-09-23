@@ -12,34 +12,32 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-  const val logback_classic: String = "1.2.3"
+    const val de_fayard_buildsrcversions_gradle_plugin: String = "0.6.1"
 
-  const val hikaricp: String = "3.3.1" // available: "3.4.1"
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.50"
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.5.0" // available: "0.6.1"
+    const val org_jetbrains_kotlin: String = "1.3.50"
 
-  const val argon2_jvm: String = "2.5"
+    const val mariadb_java_client: String = "2.4.4"
 
-  const val io_ktor: String = "1.2.4"
+    const val org_junit_jupiter: String = "5.5.2"
 
-  const val exposed: String = "0.17.3"
+    const val logback_classic: String = "1.2.3"
 
-  const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.50"
+    const val argon2_jvm: String = "2.5"
 
-  const val org_jetbrains_kotlin: String = "1.3.50"
+    const val hikaricp: String = "3.4.1"
 
-  const val org_junit_jupiter: String = "5.5.2"
+    const val exposed: String = "0.17.3"
 
-  const val mariadb_java_client: String = "2.4.3" // available: "2.4.4"
+    const val io_ktor: String = "1.2.4"
 
-  /**
-   *
-   * See issue 19: How to update Gradle itself?
-   * https://github.com/jmfayard/buildSrcVersions/issues/19
-   */
-  const val gradleLatestVersion: String = "5.6.2"
-
-  const val gradleCurrentVersion: String = "5.6.2"
+    /**
+     * Current version: "5.6.2"
+     * See issue 19: How to update Gradle itself?
+     * https://github.com/jmfayard/buildSrcVersions/issues/19
+     */
+    const val gradleLatestVersion: String = "5.6.2"
 }
 
 /**
@@ -47,5 +45,5 @@ object Versions {
  * https://github.com/jmfayard/buildSrcVersions/issues/47
  */
 val PluginDependenciesSpec.buildSrcVersions: PluginDependencySpec
-  inline get() =
-      id("de.fayard.buildSrcVersions").version(Versions.de_fayard_buildsrcversions_gradle_plugin)
+    inline get() =
+            id("de.fayard.buildSrcVersions").version(Versions.de_fayard_buildsrcversions_gradle_plugin)
