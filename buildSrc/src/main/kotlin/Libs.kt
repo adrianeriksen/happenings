@@ -7,93 +7,89 @@ import kotlin.String
  *   `$ ./gradlew buildSrcVersions`
  */
 object Libs {
-  /**
-   * http://logback.qos.ch
-   */
-  const val logback_classic: String = "ch.qos.logback:logback-classic:" + Versions.logback_classic
+    const val de_fayard_buildsrcversions_gradle_plugin: String =
+            "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
+            Versions.de_fayard_buildsrcversions_gradle_plugin
 
-  /**
-   * https://github.com/brettwooldridge/HikariCP
-   */
-  const val hikaricp: String = "com.zaxxer:HikariCP:" + Versions.hikaricp
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
+            "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
+            Versions.org_jetbrains_kotlin_jvm_gradle_plugin
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String =
-      "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
-      Versions.de_fayard_buildsrcversions_gradle_plugin
+    /**
+     * https://kotlinlang.org/
+     */
+    const val kotlin_scripting_compiler_embeddable: String =
+            "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:" +
+            Versions.org_jetbrains_kotlin
 
-  /**
-   * https://github.com/phxql/argon2-jvm
-   */
-  const val argon2_jvm: String = "de.mkammerer:argon2-jvm:" + Versions.argon2_jvm
+    /**
+     * https://kotlinlang.org/
+     */
+    const val kotlin_stdlib_jdk8: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:" +
+            Versions.org_jetbrains_kotlin
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_auth_jwt: String = "io.ktor:ktor-auth-jwt:" + Versions.io_ktor
+    /**
+     * https://mariadb.com/kb/en/mariadb/about-mariadb-connector-j/
+     */
+    const val mariadb_java_client: String = "org.mariadb.jdbc:mariadb-java-client:" +
+            Versions.mariadb_java_client
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_gson: String = "io.ktor:ktor-gson:" + Versions.io_ktor
+    /**
+     * https://junit.org/junit5/
+     */
+    const val junit_jupiter_api: String = "org.junit.jupiter:junit-jupiter-api:" +
+            Versions.org_junit_jupiter
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_server_core: String = "io.ktor:ktor-server-core:" + Versions.io_ktor
+    /**
+     * https://junit.org/junit5/
+     */
+    const val junit_jupiter_engine: String = "org.junit.jupiter:junit-jupiter-engine:" +
+            Versions.org_junit_jupiter
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_server_netty: String = "io.ktor:ktor-server-netty:" + Versions.io_ktor
+    /**
+     * http://logback.qos.ch
+     */
+    const val logback_classic: String = "ch.qos.logback:logback-classic:" + Versions.logback_classic
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_server_sessions: String = "io.ktor:ktor-server-sessions:" + Versions.io_ktor
+    /**
+     * https://github.com/phxql/argon2-jvm
+     */
+    const val argon2_jvm: String = "de.mkammerer:argon2-jvm:" + Versions.argon2_jvm
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_server_test_host: String = "io.ktor:ktor-server-test-host:" + Versions.io_ktor
+    /**
+     * https://github.com/brettwooldridge/HikariCP
+     */
+    const val hikaricp: String = "com.zaxxer:HikariCP:" + Versions.hikaricp
 
-  /**
-   * https://github.com/ktorio/ktor
-   */
-  const val ktor_server_tests: String = "io.ktor:ktor-server-tests:" + Versions.io_ktor
+    const val exposed: String = "org.jetbrains.exposed:exposed:" + Versions.exposed
 
-  const val exposed: String = "org.jetbrains.exposed:exposed:" + Versions.exposed
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_gson: String = "io.ktor:ktor-gson:" + Versions.io_ktor
 
-  const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
-      "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
-      Versions.org_jetbrains_kotlin_jvm_gradle_plugin
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_server_core: String = "io.ktor:ktor-server-core:" + Versions.io_ktor
 
-  /**
-   * https://kotlinlang.org/
-   */
-  const val kotlin_scripting_compiler_embeddable: String =
-      "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:" + Versions.org_jetbrains_kotlin
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_server_netty: String = "io.ktor:ktor-server-netty:" + Versions.io_ktor
 
-  /**
-   * https://kotlinlang.org/
-   */
-  const val kotlin_stdlib_jdk8: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:" +
-      Versions.org_jetbrains_kotlin
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_server_sessions: String = "io.ktor:ktor-server-sessions:" + Versions.io_ktor
 
-  /**
-   * https://junit.org/junit5/
-   */
-  const val junit_jupiter_api: String = "org.junit.jupiter:junit-jupiter-api:" +
-      Versions.org_junit_jupiter
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_server_test_host: String = "io.ktor:ktor-server-test-host:" + Versions.io_ktor
 
-  /**
-   * https://junit.org/junit5/
-   */
-  const val junit_jupiter_engine: String = "org.junit.jupiter:junit-jupiter-engine:" +
-      Versions.org_junit_jupiter
-
-  /**
-   * https://mariadb.com/kb/en/mariadb/about-mariadb-connector-j/
-   */
-  const val mariadb_java_client: String = "org.mariadb.jdbc:mariadb-java-client:" +
-      Versions.mariadb_java_client
+    /**
+     * https://github.com/ktorio/ktor
+     */
+    const val ktor_server_tests: String = "io.ktor:ktor-server-tests:" + Versions.io_ktor
 }

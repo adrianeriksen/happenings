@@ -60,10 +60,7 @@ class EventsControllerTest : ControllerTest {
 
     @Test
     fun `Return 404 Not Found when provided invalid id`() = testApplication {
-        val authToken = generateAuthorizationToken()
-
         handleRequest(HttpMethod.Delete, "/api/events/42") {
-            addHeader(HttpHeaders.Authorization, "Bearer $authToken")
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
         }.apply {
             assertEquals(HttpStatusCode.NotFound, response.status())
@@ -72,10 +69,7 @@ class EventsControllerTest : ControllerTest {
 
     @Test
     fun `Return 403 Forbidden when authenticated user is not owner`() = testApplication {
-        val authToken = generateAuthorizationToken()
-
         handleRequest(HttpMethod.Delete, "/api/events/2") {
-            addHeader(HttpHeaders.Authorization, "Bearer $authToken")
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
         }.apply {
             assertEquals(HttpStatusCode.Forbidden, response.status())
@@ -84,10 +78,7 @@ class EventsControllerTest : ControllerTest {
 
     @Test
     fun `Return 204 No Content when delete was successful`() = testApplication {
-        val authToken = generateAuthorizationToken()
-
         handleRequest(HttpMethod.Delete, "/api/events/1") {
-            addHeader(HttpHeaders.Authorization, "Bearer $authToken")
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
         }.apply {
             assertEquals(HttpStatusCode.NoContent, response.status())

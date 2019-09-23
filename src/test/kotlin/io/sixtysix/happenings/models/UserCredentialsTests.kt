@@ -9,6 +9,7 @@ class UserCredentialsTests {
     private val credential = UserCredentials(
         1,
         "adrian@example.com",
+        "Adrian Alexander",
         "\$argon2i\$v=19\$m=1024,t=2,p=2\$Zk9QVTZrWVNUOTg5MENNZA\$rs8PlLzslZpyGrYaFjlWxoHuA1QTePE67fCmY4KNHfM")
 
     @Test

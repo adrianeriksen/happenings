@@ -14,10 +14,9 @@ import io.ktor.sessions.set
 import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.exceptions.InvalidCredentialsError
 import io.sixtysix.happenings.forms.LoginForm
-import io.sixtysix.happenings.services.AuthService
 import io.sixtysix.happenings.services.UserService
 
-fun Route.authController(userService: UserService, authService: AuthService) {
+fun Route.authController(userService: UserService) {
 
     route("/api/auth") {
 
@@ -25,16 +24,13 @@ fun Route.authController(userService: UserService, authService: AuthService) {
             val userSession = call.sessions.get<UserSession>()
 
             if (userSession != null) {
-                val email = authService.getEmail(userSession.token)
-                val user = userService.getUserByEmail(email)
-
-                if (user != null) {
-                    call.respond(user.toAuthenticatedUser(token = userSession.token))
+                userService.getUser(userSession.id)?.let {
+                    call.respond(it)
                     return@get
                 }
-            } else {
-                call.respond(HttpStatusCode.NoContent)
             }
+
+            call.respond(HttpStatusCode.NoContent)
         }
 
         post("/login") {
@@ -43,9 +39,8 @@ fun Route.authController(userService: UserService, authService: AuthService) {
             val user = userService.getUserCredentialsByEmail(loginForm.email)
 
             if (user != null && user.validatePassword(loginForm.password)) {
-                val token = authService.generateToken(user)
-                call.sessions.set(UserSession(token))
-                call.respond(user.toAuthenticatedUser(token))
+                call.sessions.set(UserSession(user.id))
+                call.respond(user)
             } else {
                 throw InvalidCredentialsError
             }

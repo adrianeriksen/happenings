@@ -1,3 +1,5 @@
 package io.sixtysix.happenings
 
-data class UserSession(val token: String)
+import io.ktor.auth.Principal
+
+data class UserSession(val id: Int) : Principal

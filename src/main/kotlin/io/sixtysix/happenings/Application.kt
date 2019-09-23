@@ -2,8 +2,8 @@ package io.sixtysix.happenings
 
 import io.ktor.application.*
 import io.ktor.auth.Authentication
-import io.ktor.auth.jwt.JWTPrincipal
-import io.ktor.auth.jwt.jwt
+import io.ktor.auth.UnauthorizedResponse
+import io.ktor.auth.session
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
 import io.ktor.gson.gson
@@ -27,7 +27,7 @@ import java.io.File
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @KtorExperimentalAPI
-fun Application.module(authService: AuthService, eventService: EventService, userService: UserService) {
+fun Application.module(eventService: EventService, userService: UserService) {
 
     // TODO: Inject into application
     val hashKey = hex("73b24864c3baab136598b6f66c68b26f")
@@ -45,15 +45,9 @@ fun Application.module(authService: AuthService, eventService: EventService, use
     }
 
     install(Authentication) {
-        jwt {
-            verifier(authService.verifier)
-            validate { credential ->
-                credential.payload.claims.forEach(::println)
-                val email = credential.payload.getClaim("email")?.asString() ?: return@validate null
-                userService.getUserCredentialsByEmail(email) ?: return@validate null
-
-                JWTPrincipal(credential.payload)
-            }
+        session<UserSession> {
+            validate { it }
+            challenge { call.respond(UnauthorizedResponse()) }
         }
     }
 
@@ -67,7 +61,7 @@ fun Application.module(authService: AuthService, eventService: EventService, use
     }
 
     routing {
-        authController(userService, authService)
+        authController(userService)
         eventsController(eventService)
         userController(userService)
     }
@@ -75,26 +69,18 @@ fun Application.module(authService: AuthService, eventService: EventService, use
 
 @KtorExperimentalAPI
 fun Application.regularModule() {
-    val jwtIssuer = environment.config.property("jwt.domain").getString()
-    val jwtSecret = environment.config.property("jwt.secret").getString()
-
     DatabaseFactory.init()
 
-    val authService = AuthService(jwtIssuer, jwtSecret)
     val eventService = EventServiceImpl()
     val userService = UserServiceImpl()
 
-    module(authService, eventService, userService)
+    module(eventService, userService)
 }
 
 @KtorExperimentalAPI
 fun Application.testableModule() {
-    val jwtIssuer = environment.config.property("jwt.domain").getString()
-    val jwtSecret = environment.config.property("jwt.secret").getString()
-
-    val authService = AuthService(jwtIssuer, jwtSecret)
     val eventService = EventServiceMock()
     val userService = UserServiceMock()
 
-    module(authService, eventService, userService)
+    module(eventService, userService)
 }

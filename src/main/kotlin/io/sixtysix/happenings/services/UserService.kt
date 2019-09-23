@@ -6,6 +6,8 @@ import io.sixtysix.happenings.models.UserCredentials
 
 interface UserService {
 
+    suspend fun getUser(id: Int): User?
+
     suspend fun getUserByEmail(email: String): User?
 
     suspend fun getUserCredentialsByEmail(email: String): UserCredentials?

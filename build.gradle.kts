@@ -28,7 +28,6 @@ dependencies {
     implementation(Libs.ktor_server_netty)
     implementation(Libs.ktor_server_sessions)
     implementation(Libs.ktor_gson)
-    implementation(Libs.ktor_auth_jwt)
 
     testImplementation(Libs.ktor_server_tests)
     testImplementation(Libs.ktor_server_test_host)

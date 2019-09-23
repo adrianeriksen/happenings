@@ -5,13 +5,17 @@ import io.sixtysix.happenings.models.User
 import io.sixtysix.happenings.models.UserCredentials
 import io.sixtysix.happenings.models.Users
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
-import io.sixtysix.happenings.utils.PasswordUtil
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.joda.time.DateTime
 
 class UserServiceImpl : UserService {
+
+    override suspend fun getUser(id: Int): User? =
+        dbQuery {
+            Users.select { Users.id eq id }.mapNotNull { toUser(it) }.singleOrNull()
+        }
 
     override suspend fun getUserByEmail(email: String) =
         dbQuery {
