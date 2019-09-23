@@ -21,7 +21,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetch('/api/auth/token').then(async res => {
+    fetch('/api/auth/user').then(async res => {
       if (res.status === 200) {
         const data = await res.json();
         setCurrentUser(data);

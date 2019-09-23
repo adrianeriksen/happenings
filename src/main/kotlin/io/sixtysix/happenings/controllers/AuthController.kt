@@ -20,7 +20,7 @@ fun Route.authController(userService: UserService) {
 
     route("/api/auth") {
 
-        get("/token") {
+        get("/user") {
             val userSession = call.sessions.get<UserSession>()
 
             if (userSession != null) {
