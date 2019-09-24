@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import LoginButton from './LoginButton';
 import UserContext from '../contexts/UserContext';
 import UserInformation from './UserInformation';
+import AnchorLink from './shared/AnchorLink';
+import ButtonLink from './shared/ButtonLink';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,13 +25,17 @@ function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Happenings
-          </Typography>
+          <AnchorLink
+            to="/"
+            label="Happenings"
+            variant="h6"
+            color="inherit"
+            className={classes.title}
+          />
           {currentUser ? (
             <UserInformation user={currentUser} />
           ) : (
-            <LoginButton />
+            <ButtonLink to="/login" label="Login" color="inherit" />
           )}
         </Toolbar>
       </AppBar>
