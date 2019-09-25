@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import EventCard from './EventCard';
+import { fetchEvents } from '../actions/events';
 
-function Events() {
-  const [events, setEvents] = useState([]);
-
+function Events({ events, fetchEvents }) {
   useEffect(() => {
-    fetch('/api/events')
-      .then(res => res.json())
-      .then(res => setEvents(res));
-  }, []);
+    fetchEvents();
+  }, [fetchEvents]);
 
   return events.map(event => <EventCard key={event.id} event={event} />);
 }
 
-export default Events;
+const mapStateToProps = state => ({
+  events: state.events.events
+});
+
+const mapDispatchToProps = {
+  fetchEvents
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Events);
