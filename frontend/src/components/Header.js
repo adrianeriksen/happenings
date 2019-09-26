@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import UserContext from '../contexts/UserContext';
 import UserInformation from './UserInformation';
 import AnchorLink from './shared/AnchorLink';
 import ButtonLink from './shared/ButtonLink';
@@ -16,10 +15,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Header() {
+function Header({ isAuthenticated, principal }) {
   const classes = useStyles();
-
-  const { currentUser } = useContext(UserContext);
 
   return (
     <div className={classes.root}>
@@ -32,8 +29,8 @@ function Header() {
             color="inherit"
             className={classes.title}
           />
-          {currentUser ? (
-            <UserInformation user={currentUser} />
+          {isAuthenticated ? (
+            <UserInformation user={principal} />
           ) : (
             <ButtonLink to="/login" label="Login" color="inherit" />
           )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/styles';
 import { Container } from '@material-ui/core';
@@ -8,6 +9,7 @@ import Events from './Events';
 import Login from './Login';
 import UserContext from '../contexts/UserContext';
 import Header from './Header';
+import { fetchPrincipal } from '../actions/auth';
 
 const useStyles = makeStyles({
   container: {
@@ -15,25 +17,23 @@ const useStyles = makeStyles({
   }
 });
 
-function App() {
+function App({ auth, fetchPrincipal }) {
   const classes = useStyles();
 
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetch('/api/auth/user').then(async res => {
-      if (res.status === 200) {
-        const data = await res.json();
-        setCurrentUser(data);
-      }
-    });
-  }, []);
+    fetchPrincipal();
+  }, [fetchPrincipal]);
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       <Router>
         <>
-          <Header />
+          <Header
+            isAuthenticated={auth.isAuthenticated}
+            principal={auth.principal}
+          />
           <Container maxWidth="sm" className={classes.container}>
             <Switch>
               <Route path="/" exact component={Events} />
@@ -46,4 +46,15 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = {
+  fetchPrincipal
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
