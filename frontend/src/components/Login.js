@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
 import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import UserContext from '../contexts/UserContext';
 import { Typography } from '@material-ui/core';
+import { authenticate } from '../actions/auth';
 
 const useStyles = makeStyles({
   button: {
@@ -16,12 +17,10 @@ const useStyles = makeStyles({
   }
 });
 
-function Login({ history }) {
+function Login({ history, authenticate, isAuthenticated, isError }) {
   const classes = useStyles();
 
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  if (currentUser) {
+  if (isAuthenticated) {
     history.push('/');
   }
 
@@ -40,82 +39,86 @@ function Login({ history }) {
   };
 
   const onSubmit = (values, { setSubmitting }) => {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    const requestOptions = {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(values)
-    };
-
-    fetch('/api/auth/login', requestOptions)
-      .then(res => res.json())
-      .then(res => {
-        setCurrentUser(res);
-        setSubmitting(false);
-      });
+    authenticate(values.email, values.password);
+    setSubmitting(false);
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={validate}
-      onSubmit={onSubmit}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <Typography variant="h3">Login</Typography>
-          <TextField
-            id="login-form-email"
-            name="email"
-            type="email"
-            label="E-mail"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            error={errors.email && touched.email}
-            helperText={errors.email && touched.email ? errors.email : null}
-            className={classes.field}
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            id="login-form-password"
-            name="password"
-            type="password"
-            label="Password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            error={errors.password && touched.password}
-            helperText={
-              errors.password && touched.password ? errors.password : null
-            }
-            className={classes.field}
-            variant="filled"
-            fullWidth
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="large"
-            className={classes.button}
-          >
-            Log In
-          </Button>
-        </form>
+    <>
+      {isError && (
+        <p>You have entered an invalid username and password combination.</p>
       )}
-    </Formik>
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={onSubmit}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Typography variant="h3">Login</Typography>
+            <TextField
+              id="login-form-email"
+              name="email"
+              type="email"
+              label="E-mail"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              error={errors.email && touched.email}
+              helperText={errors.email && touched.email ? errors.email : null}
+              className={classes.field}
+              variant="filled"
+              fullWidth
+            />
+            <TextField
+              id="login-form-password"
+              name="password"
+              type="password"
+              label="Password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              error={errors.password && touched.password}
+              helperText={
+                errors.password && touched.password ? errors.password : null
+              }
+              className={classes.field}
+              variant="filled"
+              fullWidth
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              className={classes.button}
+            >
+              Log In
+            </Button>
+          </form>
+        )}
+      </Formik>
+    </>
   );
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isError: state.auth.isError
+});
+
+const mapDispatchToProps = {
+  authenticate
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
