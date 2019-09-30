@@ -27,7 +27,9 @@ class UserServiceMock : UserService {
 
     override suspend fun getUserCredentialsByEmail(email: String): UserCredentials? {
         return if (email == "adrian@example.io") {
-            UserCredentials(1,"adrian@example.io", "Adrian Alexander", "fa3c8864ba3a9bc022f4225a79143220")
+            // email:    adrian@example.io
+            // password: kitten
+            UserCredentials(1,"adrian@example.io", "Adrian Alexander", "\$argon2d\$v=19\$m=128,t=1,p=1\$c29tZXNhbHQ\$01raD65wdVHF/VidUsLjxp4ITvvhsNMIO03hw/spuYs")
         } else {
             null
         }
