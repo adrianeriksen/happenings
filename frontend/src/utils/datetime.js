@@ -1,14 +1,9 @@
-import { ZonedDateTime, DateTimeFormatter } from 'js-joda';
-import { Locale } from '@js-joda/locale_en';
+import { format } from 'date-fns';
 
-export default function DateTime(rawTimestamp) {
-  const timestamp = ZonedDateTime.parse(rawTimestamp);
-
-  const longFormatter = DateTimeFormatter.ofPattern(
-    'EEEE, d. MMMM, H:mm'
-  ).withLocale(Locale.US);
+export default function DateTime(timestamp) {
+  const date = new Date(timestamp);
 
   return {
-    toLongFormat: () => timestamp.format(longFormatter)
+    toLongFormat: () => format(date, 'EEEE, d. MMMM, H:mm')
   };
 }
