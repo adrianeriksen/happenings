@@ -14,17 +14,17 @@ class UserServiceImpl : UserService {
 
     override suspend fun getUser(id: Int): User? =
         dbQuery {
-            Users.select { Users.id eq id }.mapNotNull { toUser(it) }.singleOrNull()
+            Users.select { Users.id eq id }.mapNotNull { it.toUser() }.singleOrNull()
         }
 
     override suspend fun getUserByEmail(email: String) =
         dbQuery {
-            Users.select { Users.email eq email }.mapNotNull { toUser(it) }.singleOrNull()
+            Users.select { Users.email eq email }.mapNotNull { it.toUser() }.singleOrNull()
         }
 
     override suspend fun getUserCredentialsByEmail(email: String) =
         dbQuery {
-            Users.select { Users.email eq email }.mapNotNull { toUserCredentials(it) }.singleOrNull()
+            Users.select { Users.email eq email }.mapNotNull { it.toUserCredentials() }.singleOrNull()
         }
 
     override suspend fun createUser(user: NewUserForm) {
@@ -41,20 +41,20 @@ class UserServiceImpl : UserService {
         }
     }
 
-    private fun toUser(row: ResultRow): User =
+    private fun ResultRow.toUser(): User =
         User(
-            id = row[Users.id],
-            email = row[Users.email],
-            name = row[Users.name],
-            createdAt = row[Users.createdAt],
-            updatedAt = row[Users.updatedAt]
+            id = this[Users.id],
+            email = this[Users.email],
+            name = this[Users.name],
+            createdAt = this[Users.createdAt],
+            updatedAt = this[Users.updatedAt]
         )
 
-    private fun toUserCredentials(row: ResultRow): UserCredentials =
+    private fun ResultRow.toUserCredentials(): UserCredentials =
         UserCredentials(
-            id = row[Users.id],
-            email = row[Users.email],
-            name = row[Users.name],
-            hashedPassword = row[Users.hashedPassword]
+            id = this[Users.id],
+            email = this[Users.email],
+            name = this[Users.name],
+            hashedPassword = this[Users.hashedPassword]
         )
 }

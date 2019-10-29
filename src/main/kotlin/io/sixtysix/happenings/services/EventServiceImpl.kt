@@ -10,11 +10,11 @@ import org.joda.time.DateTime
 class EventServiceImpl : EventService {
 
     override suspend fun getAllEvents(): List<Event> = dbQuery {
-        Events.selectAll().map { toEvent(it) }
+        Events.selectAll().map { it.toEvent() }
     }
 
     override suspend fun getEvent(id: Int): Event? = dbQuery {
-        Events.select { Events.id eq id }.mapNotNull { toEvent(it) }.singleOrNull()
+        Events.select { Events.id eq id }.mapNotNull { it.toEvent() }.singleOrNull()
     }
 
     override suspend fun createEvent(event: NewEventForm, userId: Int) {
@@ -40,16 +40,16 @@ class EventServiceImpl : EventService {
         }
     }
 
-    private fun toEvent(row: ResultRow): Event =
+    private fun ResultRow.toEvent(): Event =
             Event(
-                id = row[Events.id],
-                title = row[Events.title],
-                where = row[Events.where],
-                description = row[Events.description],
-                startsAt = row[Events.startsAt],
-                endsAt = row[Events.endsAt],
-                createdBy = row[Events.createdBy],
-                createdAt = row[Events.createdAt],
-                updatedAt = row[Events.updatedAt]
+                id = this[Events.id],
+                title = this[Events.title],
+                where = this[Events.where],
+                description = this[Events.description],
+                startsAt = this[Events.startsAt],
+                endsAt = this[Events.endsAt],
+                createdBy = this[Events.createdBy],
+                createdAt = this[Events.createdAt],
+                updatedAt = this[Events.updatedAt]
             )
 }
