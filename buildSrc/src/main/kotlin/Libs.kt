@@ -7,14 +7,6 @@ import kotlin.String
  *   `$ ./gradlew buildSrcVersions`
  */
 object Libs {
-    const val de_fayard_buildsrcversions_gradle_plugin: String =
-            "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
-            Versions.de_fayard_buildsrcversions_gradle_plugin
-
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
-            "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
-            Versions.org_jetbrains_kotlin_jvm_gradle_plugin
-
     /**
      * https://kotlinlang.org/
      */
@@ -29,12 +21,6 @@ object Libs {
             Versions.org_jetbrains_kotlin
 
     /**
-     * https://mariadb.com/kb/en/mariadb/about-mariadb-connector-j/
-     */
-    const val mariadb_java_client: String = "org.mariadb.jdbc:mariadb-java-client:" +
-            Versions.mariadb_java_client
-
-    /**
      * https://junit.org/junit5/
      */
     const val junit_jupiter_api: String = "org.junit.jupiter:junit-jupiter-api:" +
@@ -45,23 +31,6 @@ object Libs {
      */
     const val junit_jupiter_engine: String = "org.junit.jupiter:junit-jupiter-engine:" +
             Versions.org_junit_jupiter
-
-    /**
-     * http://logback.qos.ch
-     */
-    const val logback_classic: String = "ch.qos.logback:logback-classic:" + Versions.logback_classic
-
-    /**
-     * https://github.com/phxql/argon2-jvm
-     */
-    const val argon2_jvm: String = "de.mkammerer:argon2-jvm:" + Versions.argon2_jvm
-
-    /**
-     * https://github.com/brettwooldridge/HikariCP
-     */
-    const val hikaricp: String = "com.zaxxer:HikariCP:" + Versions.hikaricp
-
-    const val exposed: String = "org.jetbrains.exposed:exposed:" + Versions.exposed
 
     /**
      * https://github.com/ktorio/ktor
@@ -97,4 +66,35 @@ object Libs {
      * https://github.com/ktorio/ktor
      */
     const val ktor_server_tests: String = "io.ktor:ktor-server-tests:" + Versions.io_ktor
+
+    const val de_fayard_buildsrcversions_gradle_plugin: String =
+            "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
+            Versions.de_fayard_buildsrcversions_gradle_plugin
+
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
+            "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
+            Versions.org_jetbrains_kotlin_jvm_gradle_plugin
+
+    /**
+     * https://mariadb.com/kb/en/mariadb/about-mariadb-connector-j/
+     */
+    const val mariadb_java_client: String = "org.mariadb.jdbc:mariadb-java-client:" +
+            Versions.mariadb_java_client
+
+    /**
+     * http://logback.qos.ch
+     */
+    const val logback_classic: String = "ch.qos.logback:logback-classic:" + Versions.logback_classic
+
+    /**
+     * https://github.com/phxql/argon2-jvm
+     */
+    const val argon2_jvm: String = "de.mkammerer:argon2-jvm:" + Versions.argon2_jvm
+
+    /**
+     * https://github.com/brettwooldridge/HikariCP
+     */
+    const val hikaricp: String = "com.zaxxer:HikariCP:" + Versions.hikaricp
+
+    const val exposed: String = "org.jetbrains.exposed:exposed:" + Versions.exposed
 }
