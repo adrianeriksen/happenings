@@ -2,7 +2,6 @@ package io.sixtysix.happenings.controllers
 
 import io.ktor.application.call
 import io.ktor.auth.authenticate
-import io.ktor.auth.authentication
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond

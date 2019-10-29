@@ -13,7 +13,6 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import io.ktor.sessions.directorySessionStorage
 import io.ktor.util.KtorExperimentalAPI
-import io.ktor.util.hex
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.controllers.userController
@@ -28,9 +27,6 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @KtorExperimentalAPI
 fun Application.module(eventService: EventService, userService: UserService) {
-
-    // TODO: Inject into application
-    val hashKey = hex("73b24864c3baab136598b6f66c68b26f")
 
     install(ContentNegotiation) {
         gson {
