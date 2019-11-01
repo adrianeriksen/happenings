@@ -1,16 +1,7 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
 
-function UserInformation({ user }) {
-  return (
-    <>
-      <Button color="inherit">
-        <AccountCircle />
-        &nbsp; {user.name}
-      </Button>
-    </>
-  );
-}
+const UserInformation = ({ user }) => (
+  <button type="button">{user.name}</button>
+);
 
 export default UserInformation;

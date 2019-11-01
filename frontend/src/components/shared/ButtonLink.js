@@ -1,15 +1,13 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import CollisionLink from './CollisionLink';
+import { withRouter } from 'react-router-dom';
 
-function ButtonLink(props) {
-  const { label, ...rest } = props;
+function ButtonLink({ history, location, match, to, ...rest }) {
+  const handleClick = event => {
+    event.preventDefault();
+    history.push(to);
+  };
 
-  return (
-    <Button component={CollisionLink} {...rest}>
-      {label}
-    </Button>
-  );
+  return <button type="button" onClick={handleClick} {...rest} />;
 }
 
-export default ButtonLink;
+export default withRouter(ButtonLink);

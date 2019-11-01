@@ -2,24 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { Typography } from '@material-ui/core';
 import { authenticate } from '../actions/auth';
 
-const useStyles = makeStyles({
-  button: {
-    marginTop: 24
-  },
-  field: {
-    marginTop: 32
-  }
-});
-
 function Login({ history, authenticate, isAuthenticated, isError }) {
-  const classes = useStyles();
-
   if (isAuthenticated) {
     history.push('/');
   }
@@ -62,46 +47,26 @@ function Login({ history, authenticate, isAuthenticated, isError }) {
           handleSubmit
         }) => (
           <form onSubmit={handleSubmit}>
-            <Typography variant="h3">Login</Typography>
-            <TextField
+            <h2>Login</h2>
+            <label for="login-form-email">E-mail</label>
+            <input
               id="login-form-email"
-              name="email"
               type="email"
-              label="E-mail"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              name="email"
               value={values.email}
-              error={errors.email && touched.email}
-              helperText={errors.email && touched.email ? errors.email : null}
-              className={classes.field}
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              id="login-form-password"
-              name="password"
-              type="password"
-              label="Password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.password}
-              error={errors.password && touched.password}
-              helperText={
-                errors.password && touched.password ? errors.password : null
-              }
-              className={classes.field}
-              variant="filled"
-              fullWidth
             />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.button}
-            >
-              Log In
-            </Button>
+            <label for="login-form-password">E-mail</label>
+            <input
+              id="login-form-password"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <button type="submit">Log In</button>
           </form>
         )}
       </Formik>
