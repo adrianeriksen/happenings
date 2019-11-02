@@ -48,24 +48,28 @@ function Login({ history, authenticate, isAuthenticated, isError }) {
         }) => (
           <form onSubmit={handleSubmit}>
             <h2>Login</h2>
-            <label for="login-form-email">E-mail</label>
-            <input
-              id="login-form-email"
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <label for="login-form-password">E-mail</label>
-            <input
-              id="login-form-password"
-              type="password"
-              name="password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
+            <div className="form-group">
+              <label for="login-form-email">E-mail</label>
+              <input
+                id="login-form-email"
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="form-group">
+              <label for="login-form-password">Password</label>
+              <input
+                id="login-form-password"
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
             <button type="submit">Log In</button>
           </form>
         )}

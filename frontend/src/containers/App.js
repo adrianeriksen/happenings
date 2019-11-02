@@ -14,18 +14,16 @@ function App({ auth, fetchPrincipal }) {
 
   return (
     <Router>
-      <>
+      <div className="container">
         <Header
           isAuthenticated={auth.isAuthenticated}
           principal={auth.principal}
         />
-        <div className="container">
-          <Switch>
-            <Route path="/" exact component={Events} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </div>
-      </>
+        <Switch>
+          <Route path="/" exact component={Events} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </div>
     </Router>
   );
 }

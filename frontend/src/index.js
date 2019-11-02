@@ -6,6 +6,8 @@ import { configureStore } from 'redux-starter-kit';
 import App from './containers/App';
 import rootReducer from './reducers';
 
+import './styles/main.scss';
+
 import * as serviceWorker from './serviceWorker';
 
 const rootElement = document.getElementById('root');
