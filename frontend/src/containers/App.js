@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Events from './Events';
 import Login from './Login';
-import Header from './Header';
+import Header from '../components/header/Header';
 import { fetchPrincipal } from '../actions/auth';
 
 function App({ auth, fetchPrincipal }) {

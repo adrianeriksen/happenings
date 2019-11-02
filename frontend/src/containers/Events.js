@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import EventCard from './EventCard';
+import EventCard from '../components/events/EventCard';
 import { fetchEvents } from '../actions/events';
 
 function Events({ events, fetchEvents }) {

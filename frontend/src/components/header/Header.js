@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import UserInformation from './UserInformation';
-import ButtonLink from './shared/ButtonLink';
+import ButtonLink from '../shared/ButtonLink';
 
 const Header = ({ isAuthenticated, principal }) => (
   <header>

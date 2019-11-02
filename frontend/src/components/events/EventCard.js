@@ -1,5 +1,5 @@
 import React from 'react';
-import DateTime from '../utils/datetime';
+import DateTime from '../../utils/datetime';
 
 function EventCard({ event }) {
   const { title, startsAt } = event;
