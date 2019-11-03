@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-function ButtonLink({ history, location, match, to, ...rest }) {
+function ButtonLink({ history, location, match, staticContext, to, ...rest }) {
   const handleClick = event => {
     event.preventDefault();
     history.push(to);
