@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
 import { authenticate } from '../actions/auth';
+import TextInput from '../components/shared/TextInput';
 
 function Login({ history, authenticate, isAuthenticated, isError }) {
   if (isAuthenticated) {
@@ -38,38 +39,27 @@ function Login({ history, authenticate, isAuthenticated, isError }) {
         validate={validate}
         onSubmit={onSubmit}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit
-        }) => (
+        {({ values, handleChange, handleBlur, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <h2>Login</h2>
-            <div className="form-group">
-              <label for="login-form-email">E-mail</label>
-              <input
-                id="login-form-email"
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div className="form-group">
-              <label for="login-form-password">Password</label>
-              <input
-                id="login-form-password"
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
+            <TextInput
+              label="E-mail"
+              id="login-form-email"
+              name="email"
+              type="email"
+              value={values.email}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
+            <TextInput
+              label="Password"
+              id="login-form-password"
+              name="password"
+              type="password"
+              value={values.password}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
             <button type="submit">Log In</button>
           </form>
         )}
