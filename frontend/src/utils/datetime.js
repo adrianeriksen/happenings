@@ -4,6 +4,6 @@ export default function DateTime(timestamp) {
   const date = new Date(timestamp);
 
   return {
-    toLongFormat: () => format(date, 'EEEE, d. MMMM, H:mm')
+    toLongFormat: () => format(date, 'dd.MM.yyyy HH:mm')
   };
 }

@@ -10,6 +10,31 @@ body {
   max-width: 860px;
 }
 
+.top-bar {
+  height: 70px;
+  background-image: linear-gradient(to bottom right, #118ab2, #06d6a0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0 1.4rem;
+
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: burlywood;
+      }
+    }
+  }
+
+  button {
+    margin: 0 1.4rem;
+  }
+}
+
 .form-group {
   margin-bottom: 1rem;
 

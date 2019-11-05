@@ -5,7 +5,7 @@ import UserInformation from './UserInformation';
 import ButtonLink from '../shared/ButtonLink';
 
 const Header = ({ isAuthenticated, principal }) => (
-  <header>
+  <header className="top-bar">
     <h2>
       <Link to="/">Happenings</Link>
     </h2>
