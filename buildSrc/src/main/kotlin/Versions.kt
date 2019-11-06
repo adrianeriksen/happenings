@@ -30,14 +30,14 @@ object Versions {
 
     const val hikaricp: String = "3.4.1"
 
-    const val exposed: String = "0.17.6"
+    const val exposed: String = "0.17.7"
 
     /**
      * Current version: "5.6.3"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "5.6.3"
+    const val gradleLatestVersion: String = "5.6.4"
 }
 
 /**
