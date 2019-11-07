@@ -8,6 +8,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
+import io.ktor.sessions.clear
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
@@ -44,6 +45,11 @@ fun Route.authController(userService: UserService) {
             } else {
                 throw InvalidCredentialsError
             }
+        }
+
+        post("/logout") {
+            call.sessions.clear<UserSession>()
+            call.respond(HttpStatusCode.NoContent)
         }
     }
 }

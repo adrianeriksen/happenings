@@ -6,9 +6,9 @@ import Event from './Event';
 import Events from './Events';
 import Login from './Login';
 import Header from '../components/header/Header';
-import { fetchPrincipal } from '../actions/auth';
+import { deauthenticate, fetchPrincipal } from '../actions/auth';
 
-function App({ auth, fetchPrincipal }) {
+function App({ auth, deauthenticate, fetchPrincipal }) {
   useEffect(() => {
     fetchPrincipal();
   }, [fetchPrincipal]);
@@ -19,6 +19,7 @@ function App({ auth, fetchPrincipal }) {
         <Header
           isAuthenticated={auth.isAuthenticated}
           principal={auth.principal}
+          deauthenticate={deauthenticate}
         />
         <Switch>
           <Route path="/" exact component={Events} />
@@ -35,6 +36,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  deauthenticate,
   fetchPrincipal
 };
 

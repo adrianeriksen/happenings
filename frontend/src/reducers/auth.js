@@ -1,5 +1,9 @@
 import { createReducer } from 'redux-starter-kit';
-import { setPrincipal, authenticationFailed } from '../actions/auth';
+import {
+  setPrincipal,
+  authenticationFailed,
+  clearPrincipal
+} from '../actions/auth';
 
 const initialState = {
   isAuthenticated: false,
@@ -8,6 +12,9 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
+  [clearPrincipal]: () => ({
+    ...initialState
+  }),
   [setPrincipal]: (state, action) => ({
     ...state,
     isAuthenticated: true,
