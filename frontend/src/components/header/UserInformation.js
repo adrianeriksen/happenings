@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserInformation = ({ user, deauthenticate }) => (
-  <div class="user-information">
+  <div className="user-information">
     <button type="button">{user.name}</button>
     <button type="button" onClick={deauthenticate}>
       Log out

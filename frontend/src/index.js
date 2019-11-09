@@ -7,6 +7,7 @@ import App from './containers/App';
 import rootReducer from './reducers';
 
 import './styles/main.scss';
+import './styles/loader.scss';
 
 import * as serviceWorker from './serviceWorker';
 

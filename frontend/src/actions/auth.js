@@ -1,5 +1,8 @@
 import { createAction } from 'redux-starter-kit';
 
+export const authenticatingPrincipal = createAction(
+  'auth/authenticatingPrincipal'
+);
 export const authenticationFailed = createAction('auth/authenticationFailed');
 export const clearPrincipal = createAction('auth/clearPrincipal');
 export const setPrincipal = createAction('auth/setPrincipal');
@@ -14,6 +17,8 @@ export const fetchPrincipal = () => async dispatch => {
 };
 
 export const authenticate = (email, password) => async dispatch => {
+  dispatch(authenticatingPrincipal());
+
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
 
@@ -24,7 +29,6 @@ export const authenticate = (email, password) => async dispatch => {
   };
 
   const response = await fetch('/api/auth/login', requestOptions);
-  console.log(response);
 
   if (response.status !== 200) {
     dispatch(authenticationFailed());

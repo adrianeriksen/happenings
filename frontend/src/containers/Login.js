@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import useForm from 'react-hook-form';
 
 import { authenticate } from '../actions/auth';
+import Loader from '../components/shared/Loader';
 import TextInput from '../components/shared/TextInput';
 
-function Login({ history, authenticate, isAuthenticated, isError }) {
+function Login({ history, authenticate, isAuthenticated, isError, isLoading }) {
   if (isAuthenticated) {
     history.push('/');
   }
@@ -15,6 +16,10 @@ function Login({ history, authenticate, isAuthenticated, isError }) {
   const onSubmit = values => {
     authenticate(values.email, values.password);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -45,7 +50,8 @@ function Login({ history, authenticate, isAuthenticated, isError }) {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isError: state.auth.isError
+  isError: state.auth.isError,
+  isLoading: state.auth.isLoading
 });
 
 const mapDispatchToProps = {
