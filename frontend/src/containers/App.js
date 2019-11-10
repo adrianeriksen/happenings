@@ -7,6 +7,7 @@ import Events from './Events';
 import Login from './Login';
 import Header from '../components/header/Header';
 import { deauthenticate, fetchPrincipal } from '../actions/auth';
+import Signup from './Signup';
 
 function App({ auth, deauthenticate, fetchPrincipal }) {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App({ auth, deauthenticate, fetchPrincipal }) {
           <Route path="/" exact component={Events} />
           <Route path="/events/:id" exact component={Event} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
         </Switch>
       </div>
     </Router>
