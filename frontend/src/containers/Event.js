@@ -21,6 +21,24 @@ function Event({
   return (
     <div>
       <h2>{event.title}</h2>
+      <dl>
+        <dt>Starts at</dt>
+        <dd>{event.startsAt}</dd>
+        {event.endsAt && (
+          <>
+            <dt>Ends at</dt>
+            <dd>{event.endsAt}</dd>
+          </>
+        )}
+        {event.where && (
+          <>
+            <dt>Where</dt>
+            <dd>{event.where}</dd>
+          </>
+        )}
+      </dl>
+
+      {event.description && <p>{event.description}</p>}
     </div>
   );
 }
