@@ -12,7 +12,10 @@ const Header = ({ isAuthenticated, principal, deauthenticate }) => (
     {isAuthenticated ? (
       <UserInformation user={principal} deauthenticate={deauthenticate} />
     ) : (
-      <ButtonLink to="/login">Login</ButtonLink>
+      <div className="user-information">
+        <ButtonLink to="/login">Log in</ButtonLink>
+        <ButtonLink to="/signup">Sign up</ButtonLink>
+      </div>
     )}
   </header>
 );
