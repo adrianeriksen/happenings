@@ -19,7 +19,6 @@ function App({ auth, deauthenticate, fetchPrincipal }) {
       <div className="container">
         <Header
           isAuthenticated={auth.isAuthenticated}
-          principal={auth.principal}
           deauthenticate={deauthenticate}
         />
         <Switch>
@@ -42,7 +41,4 @@ const mapDispatchToProps = {
   fetchPrincipal
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

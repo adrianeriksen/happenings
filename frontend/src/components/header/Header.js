@@ -1,22 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import UserInformation from './UserInformation';
-import ButtonLink from '../shared/ButtonLink';
+import Navigation from './Navigation';
 
-const Header = ({ isAuthenticated, principal, deauthenticate }) => (
+const Header = ({ isAuthenticated, deauthenticate }) => (
   <header className="top-bar">
     <h2>
       <Link to="/">Happenings</Link>
     </h2>
-    {isAuthenticated ? (
-      <UserInformation user={principal} deauthenticate={deauthenticate} />
-    ) : (
-      <div className="user-information">
-        <ButtonLink to="/login">Log in</ButtonLink>
-        <ButtonLink to="/signup">Sign up</ButtonLink>
-      </div>
-    )}
+    <Navigation
+      deauthenticate={deauthenticate}
+      isAuthenticated={isAuthenticated}
+    />
   </header>
 );
 
