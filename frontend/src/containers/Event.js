@@ -30,6 +30,8 @@ function Event({
             <dd>{event.endsAt}</dd>
           </>
         )}
+        <dt>Created by ID</dt>
+        <dd>{event.createdBy}</dd>
         {event.where && (
           <>
             <dt>Where</dt>
