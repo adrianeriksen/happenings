@@ -1,13 +1,19 @@
 # ![Happenings Logo](media/logo.png)
 
-Just another random hobby project developed solely for educational purposes. Do not use in production environments, it 
-will probably just crash.
+> Create and discover events with the people that matters.
+
+A half-hearted attempt to clone everyone's favorite event application. The
+project is solely made for educational purposes, demonstrating an example
+application using Ktor and React.
+
+The application will probably never be production-ready, thus, the code is run
+at your own risk.
 
 ## Setup
 
-Before you can start the project. you need to configure a couple of environment variables that point the application to 
-your MariaDB instance.
+Before you can start the project. you need to configure a couple of environment
+variables that point the application to your MariaDB instance.
 
-* HAPPENINGS_JDBC_URL
-* HAPPENINGS_USERNAME
-* HAPPENINGS_PASSWORD
+- HAPPENINGS_JDBC_URL
+- HAPPENINGS_USERNAME
+- HAPPENINGS_PASSWORD
