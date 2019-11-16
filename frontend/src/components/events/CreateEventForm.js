@@ -6,6 +6,14 @@ function CreateEventFrom({ createEvent, isSubmitting }) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = values => {
+    const optionalFields = ['endsAt', 'where', 'description'];
+
+    optionalFields.forEach(key => {
+      if (values[key] === '') {
+        values[key] = undefined;
+      }
+    });
+
     createEvent(values);
   };
 
