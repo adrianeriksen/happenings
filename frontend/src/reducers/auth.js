@@ -1,9 +1,11 @@
 import { createReducer } from 'redux-starter-kit';
 import {
-  setPrincipal,
-  authenticationFailed,
-  clearPrincipal,
-  authenticatingPrincipal
+  fetchPrincipalInitiatedAction,
+  fetchPrincipalSuccessAction,
+  authenticationInitiatedAction,
+  authenticationSuccessAction,
+  authenticationErrorAction,
+  clearPrincipalAction
 } from '../actions/auth';
 
 const initialState = {
@@ -14,22 +16,34 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [authenticatingPrincipal]: state => ({
+  [authenticationInitiatedAction]: state => ({
     ...state,
+    principal: null,
+    isAuthenticated: false,
+    isError: false,
     isLoading: true
   }),
-  [clearPrincipal]: () => ({
-    ...initialState
-  }),
-  [setPrincipal]: (state, action) => ({
+  [authenticationSuccessAction]: (state, action) => ({
     ...state,
+    principal: action.payload,
     isAuthenticated: true,
-    isLoading: false,
-    principal: action.payload
+    isLoading: false
   }),
-  [authenticationFailed]: state => ({
+  [authenticationErrorAction]: state => ({
     ...state,
     isError: true,
     isLoading: false
+  }),
+  [fetchPrincipalInitiatedAction]: state => ({
+    ...state,
+    principal: null
+  }),
+  [fetchPrincipalSuccessAction]: (state, action) => ({
+    ...state,
+    principal: action.payload,
+    isAuthenticated: true
+  }),
+  [clearPrincipalAction]: () => ({
+    ...initialState
   })
 });

@@ -1,23 +1,37 @@
 import { createAction } from 'redux-starter-kit';
 
-export const authenticatingPrincipal = createAction(
-  'auth/authenticatingPrincipal'
+export const clearPrincipalAction = createAction('auth/clearPrincipal');
+
+export const fetchPrincipalInitiatedAction = createAction(
+  'auth/fetchPrincipalInitiated'
 );
-export const authenticationFailed = createAction('auth/authenticationFailed');
-export const clearPrincipal = createAction('auth/clearPrincipal');
-export const setPrincipal = createAction('auth/setPrincipal');
+export const fetchPrincipalSuccessAction = createAction(
+  'auth/fetchPrincipalSuccess'
+);
+
+export const authenticationInitiatedAction = createAction(
+  'auth/authenticationInitiated'
+);
+export const authenticationSuccessAction = createAction(
+  'auth/authenticationSuccess'
+);
+export const authenticationErrorAction = createAction(
+  'auth/authenticationError'
+);
 
 export const fetchPrincipal = () => async dispatch => {
+  dispatch(fetchPrincipalInitiatedAction());
+
   const response = await fetch('/api/auth/user');
 
   if (response.status === 200) {
     const data = await response.json();
-    dispatch(setPrincipal(data));
+    dispatch(fetchPrincipalSuccessAction(data));
   }
 };
 
-export const authenticate = (email, password) => async dispatch => {
-  dispatch(authenticatingPrincipal());
+export const authenticate = (email, password) => dispatch => {
+  dispatch(authenticationInitiatedAction());
 
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
@@ -28,15 +42,16 @@ export const authenticate = (email, password) => async dispatch => {
     body: JSON.stringify({ email, password })
   };
 
-  const response = await fetch('/api/auth/login', requestOptions);
+  fetch('/api/auth/login', requestOptions)
+    .then(res => {
+      if (res.status !== 200) {
+        throw Error(`Couldn't authenticate user`);
+      }
 
-  if (response.status !== 200) {
-    dispatch(authenticationFailed());
-    return;
-  }
-
-  const data = await response.json();
-  dispatch(setPrincipal(data));
+      return res.json();
+    })
+    .then(res => dispatch(authenticationSuccessAction(res)))
+    .catch(_ => dispatch(authenticationErrorAction()));
 };
 
 export const deauthenticate = () => async dispatch => {
@@ -50,5 +65,5 @@ export const deauthenticate = () => async dispatch => {
 
   await fetch('/api/auth/logout', requestOptions);
 
-  dispatch(clearPrincipal());
+  dispatch(clearPrincipalAction());
 };

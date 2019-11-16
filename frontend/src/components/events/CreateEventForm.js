@@ -2,7 +2,7 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import TextInput from '../shared/TextInput';
 
-function CreateEventFrom({ createEvent }) {
+function CreateEventFrom({ createEvent, isSubmitting }) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = values => {
@@ -47,7 +47,9 @@ function CreateEventFrom({ createEvent }) {
         type="text"
         register={register}
       />
-      <button type="submit">Create event</button>
+      <button type="submit" disabled={isSubmitting}>
+        Create event
+      </button>
     </form>
   );
 }
