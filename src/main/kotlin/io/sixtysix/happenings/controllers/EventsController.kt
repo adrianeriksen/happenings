@@ -11,8 +11,9 @@ import io.ktor.sessions.sessions
 import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
+import io.sixtysix.happenings.services.UserService
 
-fun Route.eventsController(eventService: EventService) {
+fun Route.eventsController(eventService: EventService, userService: UserService) {
 
     route("/api/events") {
 
@@ -25,8 +26,16 @@ fun Route.eventsController(eventService: EventService) {
             val id = call.parameters["id"]?.toInt()!!
             val event = eventService.getEvent(id)
 
-            if (event == null) call.respond(HttpStatusCode.NotFound)
-            else call.respond(event)
+            if (event == null) {
+                call.respond(HttpStatusCode.NotFound)
+                return@get
+            }
+
+            userService.getUser(event.createdBy)?.let {
+                event.createdByName = it.name
+            }
+
+            call.respond(event)
         }
 
         authenticate {

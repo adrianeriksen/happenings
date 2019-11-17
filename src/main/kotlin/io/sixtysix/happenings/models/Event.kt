@@ -10,4 +10,7 @@ data class Event(val id: Int,
                  val endsAt: DateTime?,
                  val createdBy: Int,
                  val createdAt: DateTime,
-                 val updatedAt: DateTime)
+                 val updatedAt: DateTime) {
+
+    var createdByName: String? = null
+}

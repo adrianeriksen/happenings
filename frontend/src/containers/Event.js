@@ -30,8 +30,8 @@ function Event({
             <dd>{event.endsAt}</dd>
           </>
         )}
-        <dt>Created by ID</dt>
-        <dd>{event.createdBy}</dd>
+        <dt>Created by</dt>
+        <dd>{event.createdByName}</dd>
         {event.where && (
           <>
             <dt>Where</dt>

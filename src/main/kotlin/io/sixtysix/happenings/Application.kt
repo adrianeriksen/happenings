@@ -58,7 +58,7 @@ fun Application.module(eventService: EventService, userService: UserService) {
 
     routing {
         authController(userService)
-        eventsController(eventService)
+        eventsController(eventService, userService)
         userController(userService)
     }
 }
