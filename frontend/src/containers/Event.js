@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchEvent } from '../actions/events';
+import DateTime from '../utils/datetime';
 
 function Event({
   event,
@@ -18,23 +19,34 @@ function Event({
     return null;
   }
 
+  const parsedStartsAt = DateTime(event.startsAt).toLongFormat();
+  const parsedEndsAt = event.endsAt
+    ? DateTime(event.endsAt).toLongFormat()
+    : null;
+
   return (
     <div>
       <h2>{event.title}</h2>
-      <dl>
-        <dt>Starts at</dt>
-        <dd>{event.startsAt}</dd>
-        {event.endsAt && (
-          <>
-            <dt>Ends at</dt>
-            <dd>{event.endsAt}</dd>
-          </>
-        )}
-        <dt>Created by</dt>
+      <dl className="event-details">
+        <dt>
+          <i class="far fa-clock" aria-hidden="true" />
+          <span className="sr-only">Time of event:</span>
+        </dt>
+        <dd>
+          {parsedStartsAt}
+          {event.endsAt && ` to ${parsedEndsAt}`}
+        </dd>
+        <dt>
+          <i class="fas fa-poo" aria-hidden="true" />
+          <span className="sr-only">Event created by:</span>
+        </dt>
         <dd>{event.createdByName}</dd>
         {event.where && (
           <>
-            <dt>Where</dt>
+            <dt>
+              <i class="fas fa-map-marker-alt" aria-hidden="true" />
+              <span className="sr-only">Location of event:</span>
+            </dt>
             <dd>{event.where}</dd>
           </>
         )}

@@ -65,3 +65,16 @@ button {
     background-color: palevioletred;
   }
 }
+
+dl.event-details {
+  line-height: 2.4rem;
+
+  dt {
+    float: left;
+  }
+
+  dd {
+    margin-left: 30px;
+    font-size: 110%;
+  }
+}
