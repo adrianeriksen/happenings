@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from 'redux-starter-kit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 
 import App from './containers/App';
 import rootReducer from './reducers';
@@ -13,7 +14,8 @@ import * as serviceWorker from './serviceWorker';
 const rootElement = document.getElementById('root');
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: [...getDefaultMiddleware(), logger]
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

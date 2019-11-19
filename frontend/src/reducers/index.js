@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux-starter-kit';
+import { combineReducers } from '@reduxjs/toolkit';
 
 import auth from './auth';
 import events from './events';
