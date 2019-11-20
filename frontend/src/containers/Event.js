@@ -29,7 +29,7 @@ function Event({
       <h2>{event.title}</h2>
       <dl className="event-details">
         <dt>
-          <i class="far fa-clock" aria-hidden="true" />
+          <i className="far fa-clock" aria-hidden="true" />
           <span className="sr-only">Time of event:</span>
         </dt>
         <dd>
@@ -37,14 +37,14 @@ function Event({
           {event.endsAt && ` to ${parsedEndsAt}`}
         </dd>
         <dt>
-          <i class="fas fa-poo" aria-hidden="true" />
+          <i className="fas fa-poo" aria-hidden="true" />
           <span className="sr-only">Event created by:</span>
         </dt>
         <dd>{event.createdByName}</dd>
         {event.where && (
           <>
             <dt>
-              <i class="fas fa-map-marker-alt" aria-hidden="true" />
+              <i className="fas fa-map-marker-alt" aria-hidden="true" />
               <span className="sr-only">Location of event:</span>
             </dt>
             <dd>{event.where}</dd>

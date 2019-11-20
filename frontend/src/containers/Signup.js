@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import useForm from 'react-hook-form';
 import TextInput from '../components/shared/TextInput';
 import Loader from '../components/shared/Loader';
 
-function Signup({ history }) {
+function Signup({ history, isAuthenticated }) {
+  if (isAuthenticated) {
+    history.push('/');
+  }
+
   const [isCreatingUser, setIsCreatingUser] = useState(false);
 
   const { register, handleSubmit } = useForm();
@@ -63,4 +68,8 @@ function Signup({ history }) {
   );
 }
 
-export default Signup;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Signup);
