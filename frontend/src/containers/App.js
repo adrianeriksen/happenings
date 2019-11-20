@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Event from './Event';
@@ -9,7 +14,7 @@ import Header from '../components/header/Header';
 import { deauthenticate, fetchPrincipal } from '../actions/auth';
 import Signup from './Signup';
 
-function App({ auth, deauthenticate, fetchPrincipal }) {
+function App({ auth: { isAuthenticated }, deauthenticate, fetchPrincipal }) {
   useEffect(() => {
     fetchPrincipal();
   }, [fetchPrincipal]);
@@ -18,14 +23,18 @@ function App({ auth, deauthenticate, fetchPrincipal }) {
     <Router>
       <div className="container">
         <Header
-          isAuthenticated={auth.isAuthenticated}
+          isAuthenticated={isAuthenticated}
           deauthenticate={deauthenticate}
         />
         <Switch>
           <Route path="/" exact component={Events} />
           <Route path="/events/:id" exact component={Event} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/login">
+            {isAuthenticated ? <Redirect to="/" /> : <Login />}
+          </Route>
+          <Route path="/signup" component={Signup}>
+            {isAuthenticated ? <Redirect to="/" /> : <Signup />}
+          </Route>
         </Switch>
       </div>
     </Router>

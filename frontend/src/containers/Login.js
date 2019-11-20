@@ -6,11 +6,7 @@ import { authenticate } from '../actions/auth';
 import Loader from '../components/shared/Loader';
 import TextInput from '../components/shared/TextInput';
 
-function Login({ history, authenticate, isAuthenticated, isError, isLoading }) {
-  if (isAuthenticated) {
-    history.push('/');
-  }
-
+function Login({ authenticate, isError, isLoading }) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = values => {
@@ -49,7 +45,6 @@ function Login({ history, authenticate, isAuthenticated, isError, isLoading }) {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
   isError: state.auth.isError,
   isLoading: state.auth.isLoading
 });
