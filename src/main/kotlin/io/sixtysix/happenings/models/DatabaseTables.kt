@@ -3,7 +3,7 @@ package io.sixtysix.happenings.models
 import org.jetbrains.exposed.sql.Table
 
 object Events : Table() {
-    val id = integer("id").primaryKey().autoIncrement()
+    val id = integer("id").autoIncrement().primaryKey()
     val title = varchar("title", 255)
     val where = varchar("where", 255).nullable()
     val description = text("description").nullable()
@@ -15,7 +15,7 @@ object Events : Table() {
 }
 
 object Users : Table() {
-    val id = integer("id").primaryKey().autoIncrement()
+    val id = integer("id").autoIncrement().primaryKey()
     val email = varchar("email", 255).uniqueIndex()
     val hashedPassword = varchar("hashed_password", 255)
     val name = varchar("name", 255)
