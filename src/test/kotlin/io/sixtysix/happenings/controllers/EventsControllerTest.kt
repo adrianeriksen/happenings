@@ -58,32 +58,32 @@ class EventsControllerTest : ControllerTest {
         }
     }
 
-    @Test
-    fun `Return 404 Not Found when provided invalid id`() = testApplication {
-        handleRequest(HttpMethod.Delete, "/api/events/42") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-        }.apply {
-            assertEquals(HttpStatusCode.NotFound, response.status())
-        }
-    }
+//    @Test
+//    fun `Return 404 Not Found when provided invalid id`() = testApplication {
+//        handleRequest(HttpMethod.Delete, "/api/events/42") {
+//            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+//        }.apply {
+//            assertEquals(HttpStatusCode.NotFound, response.status())
+//        }
+//    }
 
-    @Test
-    fun `Return 403 Forbidden when authenticated user is not owner`() = testApplication {
-        handleRequest(HttpMethod.Delete, "/api/events/2") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-        }.apply {
-            assertEquals(HttpStatusCode.Forbidden, response.status())
-        }
-    }
+//    @Test
+//    fun `Return 403 Forbidden when authenticated user is not owner`() = testApplication {
+//        handleRequest(HttpMethod.Delete, "/api/events/2") {
+//            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+//        }.apply {
+//            assertEquals(HttpStatusCode.Forbidden, response.status())
+//        }
+//    }
 
-    @Test
-    fun `Return 204 No Content when delete was successful`() = testApplication {
-        handleRequest(HttpMethod.Delete, "/api/events/1") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-        }.apply {
-            assertEquals(HttpStatusCode.NoContent, response.status())
-        }
-    }
+//    @Test
+//    fun `Return 204 No Content when delete was successful`() = testApplication {
+//        handleRequest(HttpMethod.Delete, "/api/events/1") {
+//            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+//        }.apply {
+//            assertEquals(HttpStatusCode.NoContent, response.status())
+//        }
+//    }
 
     private fun getGsonInstance() =
         GsonBuilder().registerTypeAdapter(DateTime::class.java, DateTimeAdapter()).create()
