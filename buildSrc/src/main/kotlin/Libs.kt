@@ -67,6 +67,10 @@ object Libs {
      */
     const val ktor_server_tests: String = "io.ktor:ktor-server-tests:" + Versions.io_ktor
 
+    const val com_github_johnrengelman_shadow_gradle_plugin: String =
+            "com.github.johnrengelman.shadow:com.github.johnrengelman.shadow.gradle.plugin:" +
+            Versions.com_github_johnrengelman_shadow_gradle_plugin
+
     const val de_fayard_buildsrcversions_gradle_plugin: String =
             "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
             Versions.de_fayard_buildsrcversions_gradle_plugin
