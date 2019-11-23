@@ -2,6 +2,7 @@ package io.sixtysix.happenings.services
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.sixtysix.happenings.models.EventResponses
 import io.sixtysix.happenings.models.Events
 import io.sixtysix.happenings.models.Users
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ object DatabaseFactory {
         transaction {
             SchemaUtils.create(Events)
             SchemaUtils.create(Users)
+            SchemaUtils.create(EventResponses)
         }
     }
 

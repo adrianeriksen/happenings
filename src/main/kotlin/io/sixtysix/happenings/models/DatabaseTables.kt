@@ -22,3 +22,16 @@ object Users : Table() {
     val createdAt = datetime("created_at")
     val updatedAt = datetime("updated_at")
 }
+
+object EventResponses : Table() {
+    val id = integer("id").autoIncrement().primaryKey()
+    val user = integer("user_id") references Users.id
+    val event = integer("event_id") references Events.id
+    val status = varchar("status", 32)
+    val createdAt = datetime("created_at")
+    val updatedAt = datetime("updated_at")
+
+    init {
+        index(true, user, event)
+    }
+}
