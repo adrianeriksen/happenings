@@ -35,7 +35,7 @@ object Versions {
     const val exposed: String = "0.17.7"
 
     /**
-     * Current version: "6.0"
+     * Current version: "6.0.1"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
