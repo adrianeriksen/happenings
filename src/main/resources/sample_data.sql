@@ -13,3 +13,30 @@ INSERT INTO `Users` (`email`, `hashed_password`, `name`, `created_at`, `updated_
     NOW(),
     NOW()
 );
+
+INSERT INTO `Events` (`title`, `where`, `description`, `starts_at`, `ends_at`, `created_by_user_id`, `created_at`, `updated_at`) VALUES (
+    'Meet and greet with your cat',
+    'Oslo, Norway',
+    'Dr. Floof need quality petz frum frenz ^^,',
+    '2020-01-10 16:30:00',
+    '2020-01-10 21:00:00',
+    1,
+    NOW(),
+    NOW()
+);
+
+INSERT INTO `EventResponses` (`user_id`, `event_id`, `status`, `created_at`, `updated_at`) VALUES (
+    1,
+    1,
+    'HOST',
+    NOW(),
+    NOW()
+);
+
+INSERT INTO `EventResponses` (`user_id`, `event_id`, `status`, `created_at`, `updated_at`) VALUES (
+    2,
+    1,
+    'INVITED',
+    NOW(),
+    NOW()
+);
