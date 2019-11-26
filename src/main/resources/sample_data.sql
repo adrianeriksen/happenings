@@ -9,7 +9,7 @@ INSERT INTO `Users` (`email`, `hashed_password`, `name`, `created_at`, `updated_
 INSERT INTO `Users` (`email`, `hashed_password`, `name`, `created_at`, `updated_at`) VALUES (
     'jonas@example.io',
     '$argon2i$v=19$m=64,t=1,p=1$VUtMU0ZreEpMSzhibnp5Rg$CXLliJpG6a6AyywMp9Ox5Q',
-    'Adrian E.',
+    'Jonas S.',
     NOW(),
     NOW()
 );

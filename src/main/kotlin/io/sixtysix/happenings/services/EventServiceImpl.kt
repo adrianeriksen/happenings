@@ -1,8 +1,7 @@
 package io.sixtysix.happenings.services
 
 import io.sixtysix.happenings.forms.NewEventForm
-import io.sixtysix.happenings.models.Event
-import io.sixtysix.happenings.models.Events
+import io.sixtysix.happenings.models.*
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.joda.time.DateTime
@@ -15,6 +14,13 @@ class EventServiceImpl : EventService {
 
     override suspend fun getEvent(id: Int): Event? = dbQuery {
         Events.select { Events.id eq id }.mapNotNull { it.toEvent() }.singleOrNull()
+    }
+
+    override suspend fun getEventResponses(eventId: Int): List<EventResponse> = dbQuery {
+        (EventResponses innerJoin Users)
+            .slice(EventResponses.id, EventResponses.user, Users.name, EventResponses.status, EventResponses.createdAt, EventResponses.updatedAt)
+            .select { EventResponses.event eq eventId }
+            .map { it.toEventResponse(eventId) }
     }
 
     override suspend fun createEvent(event: NewEventForm, userId: Int) {
@@ -52,4 +58,19 @@ class EventServiceImpl : EventService {
                 createdAt = this[Events.createdAt],
                 updatedAt = this[Events.updatedAt]
             )
+
+    private fun ResultRow.toEventResponse(eventId: Int): EventResponse {
+        val eventResponse = EventResponse(
+            id = this[EventResponses.id],
+            userId = this[EventResponses.user],
+            eventId = eventId,
+            status = EventResponseStatus.valueOf(this[EventResponses.status]),
+            createdAt = this[EventResponses.createdAt],
+            updatedAt = this[EventResponses.updatedAt]
+        )
+
+        eventResponse.userName = this[Users.name]
+
+        return eventResponse
+    }
 }

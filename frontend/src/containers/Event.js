@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchEvent } from '../actions/events';
@@ -24,6 +24,10 @@ function Event({
     ? DateTime(event.endsAt).toLongFormat()
     : null;
 
+  const authors = event.eventResponses
+    .filter(response => response.status === 'HOST')
+    .map(response => response.userName);
+
   return (
     <div>
       <h2>{event.title}</h2>
@@ -40,7 +44,7 @@ function Event({
           <i className="fas fa-poo" aria-hidden="true" />
           <span className="sr-only">Event created by:</span>
         </dt>
-        <dd>{event.createdByName}</dd>
+        <dd>{authors.join(', ')}</dd>
         {event.where && (
           <>
             <dt>

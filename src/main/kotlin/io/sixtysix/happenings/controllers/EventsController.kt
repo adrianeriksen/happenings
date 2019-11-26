@@ -11,9 +11,8 @@ import io.ktor.sessions.sessions
 import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
-import io.sixtysix.happenings.services.UserService
 
-fun Route.eventsController(eventService: EventService, userService: UserService) {
+fun Route.eventsController(eventService: EventService) {
 
     route("/api/events") {
 
@@ -31,8 +30,8 @@ fun Route.eventsController(eventService: EventService, userService: UserService)
                 return@get
             }
 
-            userService.getUser(event.createdBy)?.let {
-                event.createdByName = it.name
+            eventService.getEventResponses(id).let {
+                event.eventResponses = it
             }
 
             call.respond(event)

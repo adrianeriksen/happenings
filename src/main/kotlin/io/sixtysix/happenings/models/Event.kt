@@ -12,5 +12,5 @@ data class Event(val id: Int,
                  val createdAt: DateTime,
                  val updatedAt: DateTime) {
 
-    var createdByName: String? = null
+    var eventResponses: List<EventResponse>? = null
 }

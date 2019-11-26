@@ -2,6 +2,7 @@ package io.sixtysix.happenings.services
 
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.Event
+import io.sixtysix.happenings.models.EventResponse
 import org.joda.time.DateTime
 
 val bikesheddingEvent = Event(
@@ -50,6 +51,10 @@ class EventServiceMock : EventService {
         2 -> chessEvent
         3 -> musicEvent
         else -> null
+    }
+
+    override suspend fun getEventResponses(eventId: Int): List<EventResponse> {
+        return listOf()
     }
 
     override suspend fun createEvent(event: NewEventForm, userId: Int) {
