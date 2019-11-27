@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchEvent } from '../actions/events';
@@ -26,6 +26,16 @@ function Event({
 
   const authors = event.eventResponses
     .filter(response => response.status === 'HOST')
+    .map(response => response.userName);
+
+  const attending = event.eventResponses
+    .filter(
+      response => response.status === 'HOST' || response.status === 'ACCEPTED'
+    )
+    .map(response => response.userName);
+
+  const invited = event.eventResponses
+    .filter(response => response.status === 'INVITED')
     .map(response => response.userName);
 
   return (
@@ -57,6 +67,28 @@ function Event({
       </dl>
 
       {event.description && <p>{event.description}</p>}
+
+      {attending.length > 0 && (
+        <>
+          <h3>Attending</h3>
+          <ul>
+            {attending.map((name, i) => (
+              <li key={i}>{name}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {invited.length > 0 && (
+        <>
+          <h3>Invited</h3>
+          <ul>
+            {invited.map((name, i) => (
+              <li key={i}>{name}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
