@@ -12,7 +12,7 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-    const val org_jetbrains_kotlin: String = "1.3.60"
+    const val org_jetbrains_kotlin: String = "1.3.61"
 
     const val org_junit_jupiter: String = "5.5.2"
 
@@ -22,7 +22,7 @@ object Versions {
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.7.0"
 
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.60"
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.61"
 
     const val mariadb_java_client: String = "2.5.2"
 

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
     buildSrcVersions
     application
 
