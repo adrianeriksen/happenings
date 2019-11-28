@@ -29,7 +29,7 @@ class UserServiceMock : UserService {
         return if (email == "adrian@example.io") {
             // email:    adrian@example.io
             // password: kitten
-            UserCredentials(1,"adrian@example.io", "Adrian Alexander", "\$argon2d\$v=19\$m=128,t=1,p=1\$c29tZXNhbHQ\$01raD65wdVHF/VidUsLjxp4ITvvhsNMIO03hw/spuYs")
+            UserCredentials(1,"adrian@example.io", "Adrian Alexander", "\$argon2i\$v=19\$m=64,t=1,p=1\$Ukh2a2prelBuRkpZN3d6OA\$9NOLgxmi6PY95M/PLw4MjQ")
         } else {
             null
         }

@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 
 class UserControllerTest : ControllerTest {
 
-    private val gson = Gson();
+    private val gson = Gson()
 
     @Test
     fun `Return 201 created with correct input`() = testApplication {
