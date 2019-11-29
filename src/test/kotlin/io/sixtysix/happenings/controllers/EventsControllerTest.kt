@@ -1,11 +1,9 @@
 package io.sixtysix.happenings.controllers
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.ktor.http.*
 import io.ktor.server.testing.handleRequest
-import io.ktor.server.testing.setBody
 import io.sixtysix.happenings.forms.LoginForm
 import io.sixtysix.happenings.models.Event
 import io.sixtysix.happenings.utils.DateTimeAdapter
@@ -14,8 +12,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class EventsControllerTest : ControllerTest {
-
-    private val gson = Gson()
 
     @Test
     fun `Return all events`() = testApplication {
@@ -62,44 +58,42 @@ class EventsControllerTest : ControllerTest {
 
     @Test
     fun `Return 404 Not Found when provided invalid id`() = testApplication {
-        val sessionCookieName = "SESSION_ID"
-
         val form = LoginForm("adrian@example.io", "kitten")
-
-        lateinit var sessionCookie: Cookie
-
-        handleRequest(HttpMethod.Post, "/api/auth/login") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-            setBody(gson.toJson(form))
-        }.apply {
-            sessionCookie = response.cookies[sessionCookieName]!!
-        }
+        val sessionCookie = fetchSessionCookie(form)
 
         handleRequest(HttpMethod.Delete, "/api/events/42") {
             addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-            addHeader(HttpHeaders.Cookie, "$sessionCookieName=${sessionCookie.value.encodeURLParameter()}")
+            addHeader(HttpHeaders.Cookie, "$SESSION_COOKIE_NAME=${sessionCookie.value.encodeURLParameter()}")
         }.apply {
             assertEquals(HttpStatusCode.NotFound, response.status())
         }
     }
 
-//    @Test
-//    fun `Return 403 Forbidden when authenticated user is not owner`() = testApplication {
-//        handleRequest(HttpMethod.Delete, "/api/events/2") {
-//            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-//        }.apply {
-//            assertEquals(HttpStatusCode.Forbidden, response.status())
-//        }
-//    }
+    @Test
+    fun `Return 403 Forbidden when authenticated user is not owner`() = testApplication {
+        val form = LoginForm("adrian@example.io", "kitten")
+        val sessionCookie = fetchSessionCookie(form)
 
-//    @Test
-//    fun `Return 204 No Content when delete was successful`() = testApplication {
-//        handleRequest(HttpMethod.Delete, "/api/events/1") {
-//            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-//        }.apply {
-//            assertEquals(HttpStatusCode.NoContent, response.status())
-//        }
-//    }
+        handleRequest(HttpMethod.Delete, "/api/events/2") {
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            addHeader(HttpHeaders.Cookie, "$SESSION_COOKIE_NAME=${sessionCookie.value.encodeURLParameter()}")
+        }.apply {
+            assertEquals(HttpStatusCode.Forbidden, response.status())
+        }
+    }
+
+    @Test
+    fun `Return 204 No Content when delete was successful`() = testApplication {
+        val form = LoginForm("adrian@example.io", "kitten")
+        val sessionCookie = fetchSessionCookie(form)
+
+        handleRequest(HttpMethod.Delete, "/api/events/1") {
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            addHeader(HttpHeaders.Cookie, "$SESSION_COOKIE_NAME=${sessionCookie.value.encodeURLParameter()}")
+        }.apply {
+            assertEquals(HttpStatusCode.NoContent, response.status())
+        }
+    }
 
     private fun getGsonInstance() =
         GsonBuilder().registerTypeAdapter(DateTime::class.java, DateTimeAdapter()).create()
