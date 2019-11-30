@@ -9,6 +9,7 @@ import io.ktor.routing.*
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.sixtysix.happenings.UserSession
+import io.sixtysix.happenings.forms.EventResponseForm
 import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.services.EventService
 
@@ -38,6 +39,23 @@ fun Route.eventsController(eventService: EventService) {
         }
 
         authenticate {
+            post("/{id}/response") {
+                val principal = call.sessions.get<UserSession>()
+                val userId = principal!!.id
+
+                val eventId = call.parameters["id"]?.toInt()!!
+                val event = eventService.getEvent(eventId)
+
+                if (event == null) {
+                    call.respond(HttpStatusCode.NotFound)
+                    return@post
+                }
+
+                val eventResponse = call.receive<EventResponseForm>()
+                eventService.updateEventResponse(eventId, userId, eventResponse.status)
+                call.respond(HttpStatusCode.NoContent)
+            }
+
             post("/") {
                 val principal = call.sessions.get<UserSession>()
                 val userId = principal!!.id

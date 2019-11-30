@@ -18,9 +18,40 @@ class EventServiceImpl : EventService {
 
     override suspend fun getEventResponses(eventId: Int): List<EventResponse> = dbQuery {
         (EventResponses innerJoin Users)
-            .slice(EventResponses.id, EventResponses.user, Users.name, EventResponses.status, EventResponses.createdAt, EventResponses.updatedAt)
+            .slice(EventResponses.id, EventResponses.user, EventResponses.event, Users.name, EventResponses.status, EventResponses.createdAt, EventResponses.updatedAt)
             .select { EventResponses.event eq eventId }
-            .map { it.toEventResponse(eventId) }
+            .map { it.toEventResponse(includeName = true) }
+    }
+
+    override suspend fun getEventResponse(eventId: Int, userId: Int): EventResponse? = dbQuery {
+        EventResponses
+            .select { EventResponses.event.eq(eventId) and EventResponses.user.eq(userId) }
+            .mapNotNull { it.toEventResponse() }
+            .singleOrNull()
+    }
+
+    override suspend fun updateEventResponse(eventId: Int, userId: Int, responseStatus: EventResponseStatus) {
+        val eventResponse = getEventResponse(eventId, userId)
+        val currentTime = DateTime.now()
+
+        if (eventResponse == null) {
+            dbQuery {
+                EventResponses.insert {
+                    it[event] = eventId
+                    it[user] = userId
+                    it[status] = responseStatus.toString()
+                    it[createdAt] = currentTime
+                    it[updatedAt] = currentTime
+                }
+            }
+        } else {
+            dbQuery {
+                EventResponses.update({ EventResponses.event.eq(eventId) and EventResponses.user.eq(userId) }) {
+                    it[status] = responseStatus.toString()
+                    it[updatedAt] = currentTime
+                }
+            }
+        }
     }
 
     override suspend fun createEvent(event: NewEventForm, userId: Int) {
@@ -59,17 +90,19 @@ class EventServiceImpl : EventService {
                 updatedAt = this[Events.updatedAt]
             )
 
-    private fun ResultRow.toEventResponse(eventId: Int): EventResponse {
+    private fun ResultRow.toEventResponse(includeName: Boolean = false): EventResponse {
         val eventResponse = EventResponse(
             id = this[EventResponses.id],
             userId = this[EventResponses.user],
-            eventId = eventId,
+            eventId = this[EventResponses.event],
             status = EventResponseStatus.valueOf(this[EventResponses.status]),
             createdAt = this[EventResponses.createdAt],
             updatedAt = this[EventResponses.updatedAt]
         )
 
-        eventResponse.userName = this[Users.name]
+        if (includeName) {
+            eventResponse.userName = this[Users.name]
+        }
 
         return eventResponse
     }
