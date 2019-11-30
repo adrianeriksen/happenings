@@ -9,4 +9,6 @@ data class UserCredentials(val id: Int,
 
     fun validatePassword(password: String): Boolean =
         PasswordUtil.verifyPassword(this, password)
+
+    fun toUserSimple() = UserSimple(id, email, name)
 }

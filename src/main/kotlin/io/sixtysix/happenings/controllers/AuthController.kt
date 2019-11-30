@@ -41,7 +41,7 @@ fun Route.authController(userService: UserService) {
 
             if (user != null && user.validatePassword(loginForm.password)) {
                 call.sessions.set(UserSession(user.id))
-                call.respond(user)
+                call.respond(user.toUserSimple())
             } else {
                 throw InvalidCredentialsError
             }
