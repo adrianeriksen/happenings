@@ -8,7 +8,6 @@ data class Event(val id: Int,
                  val description: String?,
                  val startsAt: DateTime,
                  val endsAt: DateTime?,
-                 val createdBy: Int,
                  val createdAt: DateTime,
                  val updatedAt: DateTime) {
 

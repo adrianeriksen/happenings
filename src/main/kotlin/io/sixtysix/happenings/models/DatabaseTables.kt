@@ -9,7 +9,6 @@ object Events : Table() {
     val description = text("description").nullable()
     val startsAt = datetime("starts_at")
     val endsAt = datetime("ends_at").nullable()
-    val createdBy = integer("created_by_user_id") references Users.id
     val createdAt = datetime("created_at")
     val updatedAt = datetime("updated_at")
 }

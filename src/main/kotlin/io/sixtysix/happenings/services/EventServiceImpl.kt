@@ -54,17 +54,24 @@ class EventServiceImpl : EventService {
         }
     }
 
-    override suspend fun createEvent(event: NewEventForm, userId: Int) {
+    override suspend fun createEvent(eventForm: NewEventForm, userId: Int) {
         val currentTime = DateTime.now()
 
         dbQuery {
-            Events.insert {
-                it[title] = event.title
-                it[where] = event.where
-                it[description] = event.description
-                it[startsAt] = event.startsAt
-                it[endsAt] = event.endsAt
-                it[createdBy] = userId
+            val eventId = Events.insert {
+                it[title] = eventForm.title
+                it[where] = eventForm.where
+                it[description] = eventForm.description
+                it[startsAt] = eventForm.startsAt
+                it[endsAt] = eventForm.endsAt
+                it[createdAt] = currentTime
+                it[updatedAt] = currentTime
+            } get Events.id
+
+            EventResponses.insert {
+                it[event] = eventId
+                it[user] = userId
+                it[status] = EventResponseStatus.HOST.toString()
                 it[createdAt] = currentTime
                 it[updatedAt] = currentTime
             }
@@ -85,7 +92,6 @@ class EventServiceImpl : EventService {
                 description = this[Events.description],
                 startsAt = this[Events.startsAt],
                 endsAt = this[Events.endsAt],
-                createdBy = this[Events.createdBy],
                 createdAt = this[Events.createdAt],
                 updatedAt = this[Events.updatedAt]
             )

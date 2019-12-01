@@ -11,6 +11,7 @@ import io.ktor.sessions.sessions
 import io.sixtysix.happenings.UserSession
 import io.sixtysix.happenings.forms.EventResponseForm
 import io.sixtysix.happenings.forms.NewEventForm
+import io.sixtysix.happenings.models.EventResponseStatus
 import io.sixtysix.happenings.services.EventService
 
 fun Route.eventsController(eventService: EventService) {
@@ -77,7 +78,11 @@ fun Route.eventsController(eventService: EventService) {
                     return@delete
                 }
 
-                if (event.createdBy != userId) {
+                val hosts = event.eventResponses!!
+                    .filter { eventResponse -> eventResponse.status == EventResponseStatus.HOST }
+                    .map { eventResponse -> eventResponse.userId  }
+
+                if (!hosts.contains(userId)) {
                     call.respond(HttpStatusCode.Forbidden)
                     return@delete
                 }

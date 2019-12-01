@@ -13,7 +13,6 @@ val bikesheddingEvent = Event(
     description = null,
     startsAt = DateTime.parse("2019-08-08T07:30:00.000"),
     endsAt = DateTime.parse("2019-08-08T15:30:00"),
-    createdBy = 1,
     createdAt = DateTime.parse("2019-08-05T22:15:00"),
     updatedAt = DateTime.parse("2019-08-05T22:15:00")
 )
@@ -25,7 +24,6 @@ val chessEvent = Event(
     description = null,
     startsAt = DateTime.parse("2019-08-09T17:30:00"),
     endsAt = DateTime.parse("2019-08-10T01:00:00"),
-    createdBy = 2,
     createdAt = DateTime.parse("2019-07-01T18:00:00"),
     updatedAt = DateTime.parse("2019-07-20T09:45:00")
 )
@@ -37,7 +35,6 @@ val musicEvent = Event(
     description = null,
     startsAt = DateTime.parse("2019-08-10T01:15:00"),
     endsAt = DateTime.parse("2019-08-10T02:00:00"),
-    createdBy = 1,
     createdAt = DateTime.parse("2019-08-07T18:25:00"),
     updatedAt = DateTime.parse("2019-08-07T18:25:00")
 )
@@ -47,11 +44,27 @@ class EventServiceMock : EventService {
     override suspend fun getAllEvents(): List<Event> =
         listOf(bikesheddingEvent, chessEvent, musicEvent)
 
-    override suspend fun getEvent(id: Int): Event? = when (id) {
-        1 -> bikesheddingEvent
-        2 -> chessEvent
-        3 -> musicEvent
-        else -> null
+    override suspend fun getEvent(id: Int): Event? {
+        val event = when (id) {
+            1 -> bikesheddingEvent
+            2 -> chessEvent
+            3 -> musicEvent
+            else -> null
+        }
+
+        if (event != null) {
+            val eventResponse = EventResponse(
+                id = 1,
+                userId = if (event.id == 2) 2 else 1,
+                eventId = event.id,
+                status = EventResponseStatus.HOST,
+                createdAt = DateTime.parse("2019-07-01T18:00:00"),
+                updatedAt = DateTime.parse("2019-07-01T18:00:00")
+            )
+            event.eventResponses = listOf(eventResponse)
+        }
+
+        return event
     }
 
     override suspend fun getEventResponses(eventId: Int): List<EventResponse> {
