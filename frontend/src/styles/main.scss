@@ -66,6 +66,18 @@ button {
   }
 }
 
+button.alt-colour {
+  background-color: mediumseagreen;
+
+  &:hover {
+    background-color: mediumorchid;
+  }
+}
+
+button.response-status-btn {
+  margin-right: 0.6rem;
+}
+
 dl.event-details {
   line-height: 2.4rem;
 

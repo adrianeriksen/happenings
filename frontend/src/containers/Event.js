@@ -7,6 +7,7 @@ import DateTime from '../utils/datetime';
 function Event({
   event,
   fetchEvent,
+  isAuthenticated,
   match: {
     params: { id }
   }
@@ -18,6 +19,20 @@ function Event({
   if (!event) {
     return null;
   }
+
+  const sendEventResponse = response => () => {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: response })
+    };
+
+    fetch(`/api/events/${id}/response`, fetchOptions).then(() =>
+      fetchEvent(id)
+    );
+  };
 
   const parsedStartsAt = DateTime(event.startsAt).toLongFormat();
   const parsedEndsAt = event.endsAt
@@ -66,6 +81,23 @@ function Event({
         )}
       </dl>
 
+      {isAuthenticated && (
+        <>
+          <button
+            className="alt-colour response-status-btn"
+            onClick={sendEventResponse('ACCEPTED')}
+          >
+            Attend
+          </button>
+          <button
+            className="response-status-btn"
+            onClick={sendEventResponse('DECLINED')}
+          >
+            Don't Attend
+          </button>
+        </>
+      )}
+
       {event.description && <p>{event.description}</p>}
 
       {attending.length > 0 && (
@@ -94,7 +126,8 @@ function Event({
 }
 
 const mapStateToProps = state => ({
-  event: state.events.event
+  event: state.events.event,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = {
