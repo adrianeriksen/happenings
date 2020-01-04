@@ -35,7 +35,7 @@ dependencies {
     testImplementation(Libs.ktor_server_tests)
     testImplementation(Libs.ktor_server_test_host)
 
-    testRuntime(Libs.junit_jupiter_engine)
+    testRuntimeOnly(Libs.junit_jupiter_engine)
     testImplementation(Libs.junit_jupiter_api)
 }
 
