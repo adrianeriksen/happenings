@@ -1,17 +1,23 @@
 package io.sixtysix.happenings.controllers
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.ktor.http.*
 import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.setBody
+import io.sixtysix.happenings.forms.EventResponseForm
 import io.sixtysix.happenings.forms.LoginForm
 import io.sixtysix.happenings.models.Event
+import io.sixtysix.happenings.models.EventResponseStatus
 import io.sixtysix.happenings.utils.DateTimeAdapter
 import org.joda.time.DateTime
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class EventsControllerTest : ControllerTest {
+
+    private val gson = Gson()
 
     @Test
     fun `Return all events`() = testApplication {
@@ -92,6 +98,22 @@ class EventsControllerTest : ControllerTest {
             addHeader(HttpHeaders.Cookie, "$SESSION_COOKIE_NAME=${sessionCookie.value.encodeURLParameter()}")
         }.apply {
             assertEquals(HttpStatusCode.NoContent, response.status())
+        }
+    }
+
+    @Test
+    fun `Return 403 Forbidden when user escalates privileges to host`() = testApplication {
+        val form = LoginForm("jonas@example.io", "kitten")
+        val sessionCookie = fetchSessionCookie(form)
+
+        val payload = EventResponseForm(EventResponseStatus.HOST)
+
+        handleRequest(HttpMethod.Post, "/api/events/1/response") {
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            addHeader(HttpHeaders.Cookie, "$SESSION_COOKIE_NAME=${sessionCookie.value.encodeURLParameter()}")
+            setBody(gson.toJson(payload))
+        }.apply {
+            assertEquals(HttpStatusCode.Forbidden, response.status())
         }
     }
 

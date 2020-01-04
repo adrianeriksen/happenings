@@ -53,6 +53,12 @@ fun Route.eventsController(eventService: EventService) {
                 }
 
                 val eventResponse = call.receive<EventResponseForm>()
+
+                if (eventResponse.status == EventResponseStatus.HOST) {
+                    call.respond(HttpStatusCode.Forbidden)
+                    return@post
+                }
+
                 eventService.updateEventResponse(eventId, userId, eventResponse.status)
                 call.respond(HttpStatusCode.NoContent)
             }
