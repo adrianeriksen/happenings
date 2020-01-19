@@ -16,7 +16,7 @@ object Versions {
 
     const val org_junit_jupiter: String = "5.5.2"
 
-    const val io_ktor: String = "1.2.6"
+    const val io_ktor: String = "1.3.0"
 
     const val com_github_johnrengelman_shadow_gradle_plugin: String = "5.2.0"
 
@@ -24,22 +24,22 @@ object Versions {
 
     const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.61"
 
-    const val mariadb_java_client: String = "2.5.2"
+    const val mariadb_java_client: String = "2.5.3"
 
     const val logback_classic: String = "1.2.3"
 
     const val argon2_jvm: String = "2.6"
 
-    const val hikaricp: String = "3.4.1"
+    const val hikaricp: String = "3.4.2"
 
     const val exposed: String = "0.17.7"
 
     /**
-     * Current version: "6.0.1"
+     * Current version: "6.1"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "6.0.1"
+    const val gradleLatestVersion: String = "6.1"
 }
 
 /**
