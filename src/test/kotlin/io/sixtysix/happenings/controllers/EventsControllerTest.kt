@@ -11,8 +11,8 @@ import io.sixtysix.happenings.forms.LoginForm
 import io.sixtysix.happenings.models.Event
 import io.sixtysix.happenings.models.EventResponseStatus
 import io.sixtysix.happenings.utils.DateTimeAdapter
-import org.joda.time.DateTime
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 import kotlin.test.assertEquals
 
 class EventsControllerTest : ControllerTest {
@@ -118,5 +118,5 @@ class EventsControllerTest : ControllerTest {
     }
 
     private fun getGsonInstance() =
-        GsonBuilder().registerTypeAdapter(DateTime::class.java, DateTimeAdapter()).create()
+        GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, DateTimeAdapter()).create()
 }

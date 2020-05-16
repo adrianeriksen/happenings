@@ -3,13 +3,13 @@ package io.sixtysix.happenings.services
 import io.sixtysix.happenings.forms.NewUserForm
 import io.sixtysix.happenings.models.User
 import io.sixtysix.happenings.models.UserCredentials
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 class UserServiceMock : UserService {
 
     override suspend fun getUser(id: Int): User? {
         return if (id == 1) {
-            val createdAt = DateTime.parse("2019-07-03T09:00")
+            val createdAt = LocalDateTime.parse("2019-07-03T09:00")
             User(1, "adrian@example.io", "Adrian Alexander", createdAt, createdAt)
         } else {
             null
@@ -17,7 +17,7 @@ class UserServiceMock : UserService {
     }
 
     override suspend fun getUserByEmail(email: String): User? {
-        val createdAt = DateTime.parse("2019-07-03T09:00")
+        val createdAt = LocalDateTime.parse("2019-07-03T09:00")
         return when (email) {
             "adrian@example.io" -> {
                 User(1, "adrian@example.io", "Adrian Alexander", createdAt, createdAt)

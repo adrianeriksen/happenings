@@ -4,17 +4,17 @@ import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.Event
 import io.sixtysix.happenings.models.EventResponse
 import io.sixtysix.happenings.models.EventResponseStatus
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 val bikesheddingEvent = Event(
     id = 1,
     title = "Technical bikeshedding with Adrian",
     where = "The Bank, Oslo",
     description = null,
-    startsAt = DateTime.parse("2019-08-08T07:30:00.000"),
-    endsAt = DateTime.parse("2019-08-08T15:30:00"),
-    createdAt = DateTime.parse("2019-08-05T22:15:00"),
-    updatedAt = DateTime.parse("2019-08-05T22:15:00")
+    startsAt = LocalDateTime.parse("2019-08-08T07:30:00.000"),
+    endsAt = LocalDateTime.parse("2019-08-08T15:30:00"),
+    createdAt = LocalDateTime.parse("2019-08-05T22:15:00"),
+    updatedAt = LocalDateTime.parse("2019-08-05T22:15:00")
 )
 
 val chessEvent = Event(
@@ -22,10 +22,10 @@ val chessEvent = Event(
     title = "Chess mastery with Jonas",
     where = "The Good Knight, Oslo",
     description = null,
-    startsAt = DateTime.parse("2019-08-09T17:30:00"),
-    endsAt = DateTime.parse("2019-08-10T01:00:00"),
-    createdAt = DateTime.parse("2019-07-01T18:00:00"),
-    updatedAt = DateTime.parse("2019-07-20T09:45:00")
+    startsAt = LocalDateTime.parse("2019-08-09T17:30:00"),
+    endsAt = LocalDateTime.parse("2019-08-10T01:00:00"),
+    createdAt = LocalDateTime.parse("2019-07-01T18:00:00"),
+    updatedAt = LocalDateTime.parse("2019-07-20T09:45:00")
 )
 
 val musicEvent = Event(
@@ -33,10 +33,10 @@ val musicEvent = Event(
     title = "Partyfest",
     where = "Grünerløkka, Oslo",
     description = null,
-    startsAt = DateTime.parse("2019-08-10T01:15:00"),
-    endsAt = DateTime.parse("2019-08-10T02:00:00"),
-    createdAt = DateTime.parse("2019-08-07T18:25:00"),
-    updatedAt = DateTime.parse("2019-08-07T18:25:00")
+    startsAt = LocalDateTime.parse("2019-08-10T01:15:00"),
+    endsAt = LocalDateTime.parse("2019-08-10T02:00:00"),
+    createdAt = LocalDateTime.parse("2019-08-07T18:25:00"),
+    updatedAt = LocalDateTime.parse("2019-08-07T18:25:00")
 )
 
 class EventServiceMock : EventService {
@@ -58,8 +58,8 @@ class EventServiceMock : EventService {
                 userId = if (event.id == 2) 2 else 1,
                 eventId = event.id,
                 status = EventResponseStatus.HOST,
-                createdAt = DateTime.parse("2019-07-01T18:00:00"),
-                updatedAt = DateTime.parse("2019-07-01T18:00:00")
+                createdAt = LocalDateTime.parse("2019-07-01T18:00:00"),
+                updatedAt = LocalDateTime.parse("2019-07-01T18:00:00")
             )
             event.eventResponses = listOf(eventResponse)
         }

@@ -1,9 +1,9 @@
 package io.sixtysix.happenings.forms
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 data class NewEventForm(val title: String,
                         val description: String?,
                         val where: String?,
-                        val startsAt: DateTime,
-                        val endsAt: DateTime?)
+                        val startsAt: LocalDateTime,
+                        val endsAt: LocalDateTime?)

@@ -8,7 +8,7 @@ import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 class UserServiceImpl : UserService {
 
@@ -28,7 +28,7 @@ class UserServiceImpl : UserService {
         }
 
     override suspend fun createUser(user: NewUserForm) {
-        val currentTime = DateTime.now()
+        val currentTime = LocalDateTime.now()
 
         dbQuery {
             Users.insert {

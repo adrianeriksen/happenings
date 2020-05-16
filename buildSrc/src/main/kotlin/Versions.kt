@@ -18,7 +18,7 @@ object Versions {
 
     const val org_junit_jupiter: String = "5.6.2"
 
-    const val io_ktor: String = "1.3.2-1.4-M1-release-99"
+    const val io_ktor: String = "1.3.2" // available: "1.3.2-1.4-M1-release-99"
 
     const val com_github_johnrengelman_shadow_gradle_plugin: String = "5.2.0"
 

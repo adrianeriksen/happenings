@@ -10,10 +10,10 @@ object Libs {
     const val exposed_core: String = "org.jetbrains.exposed:exposed-core:" +
             Versions.org_jetbrains_exposed
 
-    const val exposed_jdbc: String = "org.jetbrains.exposed:exposed-jdbc:" +
+    const val exposed_java_time: String = "org.jetbrains.exposed:exposed-java-time:" +
             Versions.org_jetbrains_exposed
 
-    const val exposed_jodatime: String = "org.jetbrains.exposed:exposed-jodatime:" +
+    const val exposed_jdbc: String = "org.jetbrains.exposed:exposed-jdbc:" +
             Versions.org_jetbrains_exposed
 
     /**
@@ -21,6 +21,12 @@ object Libs {
      */
     const val kotlin_scripting_compiler_embeddable: String =
             "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:" +
+            Versions.org_jetbrains_kotlin
+
+    /**
+     * https://kotlinlang.org/
+     */
+    const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib:" +
             Versions.org_jetbrains_kotlin
 
     /**

@@ -1,15 +1,15 @@
 package io.sixtysix.happenings.utils
 
 import com.google.gson.*
-import org.joda.time.DateTime
 import java.lang.reflect.Type
+import java.time.LocalDateTime
 
-class DateTimeAdapter : JsonSerializer<DateTime>, JsonDeserializer<DateTime> {
+class DateTimeAdapter : JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 
-    override fun serialize(src: DateTime?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement =
+    override fun serialize(src: LocalDateTime?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement =
         JsonPrimitive(src.toString())
 
-    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): DateTime =
-        DateTime(json!!.asString)
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): LocalDateTime =
+        LocalDateTime.parse(json!!.asString)
 
 }

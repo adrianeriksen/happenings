@@ -4,7 +4,7 @@ import io.sixtysix.happenings.forms.NewEventForm
 import io.sixtysix.happenings.models.*
 import io.sixtysix.happenings.services.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 class EventServiceImpl : EventService {
 
@@ -32,7 +32,7 @@ class EventServiceImpl : EventService {
 
     override suspend fun updateEventResponse(eventId: Int, userId: Int, responseStatus: EventResponseStatus) {
         val eventResponse = getEventResponse(eventId, userId)
-        val currentTime = DateTime.now()
+        val currentTime = LocalDateTime.now()
 
         if (eventResponse == null) {
             dbQuery {
@@ -55,7 +55,7 @@ class EventServiceImpl : EventService {
     }
 
     override suspend fun createEvent(eventForm: NewEventForm, userId: Int) {
-        val currentTime = DateTime.now()
+        val currentTime = LocalDateTime.now()
 
         dbQuery {
             val eventId = Events.insert {

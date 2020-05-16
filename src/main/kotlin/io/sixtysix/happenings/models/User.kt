@@ -1,9 +1,9 @@
 package io.sixtysix.happenings.models
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 data class User(val id: Int,
                 val email: String,
                 val name: String,
-                val createdAt: DateTime,
-                val updatedAt: DateTime)
+                val createdAt: LocalDateTime,
+                val updatedAt: LocalDateTime)

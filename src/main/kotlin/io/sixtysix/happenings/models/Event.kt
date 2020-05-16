@@ -1,15 +1,15 @@
 package io.sixtysix.happenings.models
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 data class Event(val id: Int,
                  val title: String,
                  val where: String?,
                  val description: String?,
-                 val startsAt: DateTime,
-                 val endsAt: DateTime?,
-                 val createdAt: DateTime,
-                 val updatedAt: DateTime) {
+                 val startsAt: LocalDateTime,
+                 val endsAt: LocalDateTime?,
+                 val createdAt: LocalDateTime,
+                 val updatedAt: LocalDateTime) {
 
     var eventResponses: List<EventResponse>? = null
 }

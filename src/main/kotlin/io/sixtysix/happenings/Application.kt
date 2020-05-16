@@ -20,8 +20,8 @@ import io.sixtysix.happenings.exceptions.AuthenticationException
 import io.sixtysix.happenings.exceptions.ErrorResponse
 import io.sixtysix.happenings.services.*
 import io.sixtysix.happenings.utils.DateTimeAdapter
-import org.joda.time.DateTime
 import java.io.File
+import java.time.LocalDateTime
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -30,7 +30,7 @@ fun Application.module(eventService: EventService, userService: UserService) {
 
     install(ContentNegotiation) {
         gson {
-            registerTypeAdapter(DateTime::class.java, DateTimeAdapter())
+            registerTypeAdapter(LocalDateTime::class.java, DateTimeAdapter())
         }
     }
 

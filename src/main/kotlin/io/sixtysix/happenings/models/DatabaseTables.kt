@@ -1,6 +1,7 @@
 package io.sixtysix.happenings.models
 
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.`java-time`.datetime
 
 object Events : Table() {
     val id = integer("id").autoIncrement().primaryKey()

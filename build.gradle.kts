@@ -22,7 +22,7 @@ dependencies {
 
     implementation(Libs.exposed_core)
     implementation(Libs.exposed_jdbc)
-    implementation(Libs.exposed_jodatime)
+    implementation(Libs.exposed_java_time)
 
     implementation(Libs.logback_classic)
     implementation(Libs.hikaricp)
@@ -40,6 +40,7 @@ dependencies {
 
     testRuntimeOnly(Libs.junit_jupiter_engine)
     testImplementation(Libs.junit_jupiter_api)
+    implementation(kotlin("stdlib"))
 }
 
 tasks {
