@@ -20,8 +20,11 @@ application {
 dependencies {
     implementation(Libs.kotlin_stdlib_jdk8)
 
+    implementation(Libs.exposed_core)
+    implementation(Libs.exposed_jdbc)
+    implementation(Libs.exposed_jodatime)
+
     implementation(Libs.logback_classic)
-    implementation(Libs.exposed)
     implementation(Libs.hikaricp)
     implementation(Libs.mariadb_java_client)
     implementation(Libs.argon2_jvm)

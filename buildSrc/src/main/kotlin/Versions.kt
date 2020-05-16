@@ -12,34 +12,34 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-    const val org_jetbrains_kotlin: String = "1.3.61"
+    const val org_jetbrains_exposed: String = "0.24.1"
 
-    const val org_junit_jupiter: String = "5.5.2"
+    const val org_jetbrains_kotlin: String = "1.3.72"
 
-    const val io_ktor: String = "1.3.0"
+    const val org_junit_jupiter: String = "5.6.2"
+
+    const val io_ktor: String = "1.3.2-1.4-M1-release-99"
 
     const val com_github_johnrengelman_shadow_gradle_plugin: String = "5.2.0"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.7.0"
 
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.61"
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.72"
 
-    const val mariadb_java_client: String = "2.5.3"
+    const val mariadb_java_client: String = "2.6.0"
 
     const val logback_classic: String = "1.2.3"
 
-    const val argon2_jvm: String = "2.6"
+    const val argon2_jvm: String = "2.7"
 
-    const val hikaricp: String = "3.4.2"
-
-    const val exposed: String = "0.17.7"
+    const val hikaricp: String = "3.4.5"
 
     /**
-     * Current version: "6.1"
+     * Current version: "6.4.1"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "6.1"
+    const val gradleLatestVersion: String = "6.4.1"
 }
 
 /**

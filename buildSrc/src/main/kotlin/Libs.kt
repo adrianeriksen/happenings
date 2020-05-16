@@ -7,6 +7,15 @@ import kotlin.String
  *   `$ ./gradlew buildSrcVersions`
  */
 object Libs {
+    const val exposed_core: String = "org.jetbrains.exposed:exposed-core:" +
+            Versions.org_jetbrains_exposed
+
+    const val exposed_jdbc: String = "org.jetbrains.exposed:exposed-jdbc:" +
+            Versions.org_jetbrains_exposed
+
+    const val exposed_jodatime: String = "org.jetbrains.exposed:exposed-jodatime:" +
+            Versions.org_jetbrains_exposed
+
     /**
      * https://kotlinlang.org/
      */
@@ -99,6 +108,4 @@ object Libs {
      * https://github.com/brettwooldridge/HikariCP
      */
     const val hikaricp: String = "com.zaxxer:HikariCP:" + Versions.hikaricp
-
-    const val exposed: String = "org.jetbrains.exposed:exposed:" + Versions.exposed
 }
