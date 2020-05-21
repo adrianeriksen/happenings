@@ -13,6 +13,9 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import io.ktor.sessions.directorySessionStorage
 import io.ktor.util.KtorExperimentalAPI
+import io.sixtysix.happenings.accounts.AccountService
+import io.sixtysix.happenings.accounts.AccountServiceImpl
+import io.sixtysix.happenings.accounts.accountsResource
 import io.sixtysix.happenings.controllers.authController
 import io.sixtysix.happenings.controllers.eventsController
 import io.sixtysix.happenings.controllers.userController
@@ -26,7 +29,7 @@ import java.time.LocalDateTime
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @KtorExperimentalAPI
-fun Application.module(eventService: EventService, userService: UserService) {
+fun Application.module(eventService: EventService, userService: UserService, accountService: AccountService) {
 
     install(ContentNegotiation) {
         gson {
@@ -57,6 +60,7 @@ fun Application.module(eventService: EventService, userService: UserService) {
     }
 
     routing {
+        accountsResource(accountService)
         authController(userService)
         eventsController(eventService)
         userController(userService)
@@ -69,14 +73,16 @@ fun Application.regularModule() {
 
     val eventService = EventServiceImpl()
     val userService = UserServiceImpl()
+    val accountService = AccountServiceImpl()
 
-    module(eventService, userService)
+    module(eventService, userService, accountService)
 }
 
 @KtorExperimentalAPI
 fun Application.testableModule() {
     val eventService = EventServiceMock()
     val userService = UserServiceMock()
+    val accountService = AccountServiceImpl()
 
-    module(eventService, userService)
+    module(eventService, userService, accountService)
 }

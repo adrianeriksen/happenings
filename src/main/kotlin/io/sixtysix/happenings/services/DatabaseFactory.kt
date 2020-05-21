@@ -2,6 +2,7 @@ package io.sixtysix.happenings.services
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.sixtysix.happenings.accounts.Accounts
 import io.sixtysix.happenings.models.EventResponses
 import io.sixtysix.happenings.models.Events
 import io.sixtysix.happenings.models.Users
@@ -9,6 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
@@ -16,6 +19,7 @@ object DatabaseFactory {
     fun init() {
         Database.connect(hikari())
         transaction {
+            SchemaUtils.create(Accounts)
             SchemaUtils.create(Events)
             SchemaUtils.create(Users)
             SchemaUtils.create(EventResponses)
@@ -34,6 +38,9 @@ object DatabaseFactory {
 
     suspend fun <T> dbQuery(block: () -> T): T =
             withContext(Dispatchers.IO) {
-                transaction { block() }
+                transaction {
+                    addLogger(StdOutSqlLogger)
+                    block()
+                }
             }
 }
