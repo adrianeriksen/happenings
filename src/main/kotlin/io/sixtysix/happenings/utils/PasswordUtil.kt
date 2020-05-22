@@ -2,7 +2,6 @@ package io.sixtysix.happenings.utils
 
 import de.mkammerer.argon2.Argon2Factory
 import de.mkammerer.argon2.Argon2Helper
-import io.sixtysix.happenings.models.UserCredentials
 
 object PasswordUtil {
 
@@ -15,8 +14,8 @@ object PasswordUtil {
     private var iterations = Argon2Helper.findIterations(argon2hasher, TIME_IN_MS, MEMORY_COST, PARALLELISM)
 
     fun hashPassword(password: String): String =
-        argon2hasher.hash(iterations, MEMORY_COST, PARALLELISM, password)
+        argon2hasher.hash(iterations, MEMORY_COST, PARALLELISM, password.toCharArray())
 
-    fun verifyPassword(user: UserCredentials, password: String): Boolean =
-        argon2hasher.verify(user.hashedPassword, password)
+    fun verifyPassword(hashedPassword: String, password: String): Boolean =
+        argon2hasher.verify(hashedPassword, password.toCharArray())
 }

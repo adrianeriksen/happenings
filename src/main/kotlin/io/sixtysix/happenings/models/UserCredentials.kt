@@ -8,7 +8,7 @@ data class UserCredentials(val id: Int,
                            val hashedPassword: String) {
 
     fun validatePassword(password: String): Boolean =
-        PasswordUtil.verifyPassword(this, password)
+        PasswordUtil.verifyPassword(this.hashedPassword, password)
 
     fun toUserSimple() = UserSimple(id, email, name)
 }
